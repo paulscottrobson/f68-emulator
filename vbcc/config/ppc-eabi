@@ -1,0 +1,19 @@
+-no-multiple-ccs
+-eabi
+-elf
+-no-regnames
+-gas
+-use-lmw
+-madd
+-cc=vbccppc -quiet -I/home/volker/vbcc/targets/ppc-eabi/include %s -o= %s %s -O=%ld
+-ccv=vbccppc -I/home/volker/vbcc/targets/ppc-eabi/include %s -o= %s %s -O=%ld
+-as=vasmppc_std -Felf -quiet %s -o %s
+-asv=vasmppc_std -Felf  %s -o %s
+-rm=rm %s
+-rmv=rm %s
+-isc=vscppc -quiet %s  %s
+-iscv=vscppc %s %s
+-ld=vlink -C vbccelf -belf32ppcbe -T /home/volker/vbcc/targets/ppc-eabi/vlink.cmd /home/volker/vbcc/targets/ppc-eabi/lib/startup.o -L/home/volker/vbcc/targets/ppc-eabi/lib %s %s -lvc -o %s -e __cstart
+-ldv=vlink -v -C vbccelf -belf32ppcbe -T /home/volker/vbcc/targets/ppc-eabi/vlink.cmd /home/volker/vbcc/targets/ppc-eabi/lib/startup.o -L/home/volker/vbcc/targets/ppc-eabi/lib %s %s -lvc -o %s -e __cstart
+-l2=vlink -belf32ppcbe -T /home/volker/vbcc/targets/ppc-eabi/vlink.cmd %s %s  -o %s -e __cstart
+-l2v=vlink -v -belf32ppcbe -T /home/volker/vbcc/targets/ppc-eabi/vlink.cmd %s %s  -o %s -e __cstart

@@ -1,0 +1,6 @@
+- Figure out why Micah's code is crashing.
+- Constants used in rendering need to come out.
+- Video Mode flag issues (under consideration)
+- Add Mouse
+- Size generalise (e.g. draw offscreen and blit) - I think I do that anyway so specify area to blit ?
+- Generalise, and add Second bitmap.

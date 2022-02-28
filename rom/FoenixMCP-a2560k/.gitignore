@@ -1,0 +1,72 @@
+# Prerequisites
+*.d
+
+# Python cache
+C256Mgr/__pycache__/
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+samples/HelloPGX/hello.pgx
+samples/HelloPGX/hello.lst
+src/mapfile
+src/mapfile
+src/foenixmcp_20211026_1.bin
+src/foenixmcp_20211026_1.bin
+src/foenixmcp_20211027_1.bin
+src/foenixmcp_setsof.bin
+src/foenixmcp_u_20201020.bin
+src/foenixmcp.bin
+src/foenixmcp_ram.bin
+src/foenixmcp_flash.bin
+src/bin/archive/foenixmcp_u_flash_20211111_03.bin
+src/bin/archive/foenixmcp_u_flash_20211112_06.bin
+src/Shit2Flash.bin
+src/bin/archive/foenixmcp_u_ram_20211206_02.bin
+src/bin/archive/foenixmcp_u_ram_20211206_01.bin
+src/bin/archive/foenixmcp_u_flash_20211206_02.bin
+src/bin/archive/foenixmcp_u_flash_20211206_01.bin

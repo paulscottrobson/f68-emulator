@@ -1,0 +1,9 @@
+-cc=vbcchc12 -cpu=6809 -I$VBCC/targets/6809-sim/include -quiet %s -o= %s %s -O=%ld
+-ccv=vbcchc12 -cpu=6809 -I$VBCC/targets/6809-sim/include %s -o= %s %s -O=%ld
+-as=vasm6809_std -quiet -nowarn=62 -opt-branch -opt-offset -Fvobj %s -o %s 
+-asv=vasm6809_std -nowarn=62 -Fvobj -opt-branch -opt-offset -v %s -o %s
+-rm=rm %s
+-rmv=rm %s
+-ld=vlink -b ihex -Cvbccelf -T$VBCC/targets/6809-sim/vlink.cmd -L$VBCC/targets/6809-sim/lib $VBCC/targets/6809-sim/lib/startup.o %s %s -o %s -lvc -Mbla
+-ldv=vlink -v  -b ihex -Cvbccelf -T$VBCC/targets/6809-sim/vlink.cmd -L$VBCC/targets/6809-sim/lib $VBCC/targets/6809-sim/lib/startup.o %s %s  -o %s -lvc -Mbla
+

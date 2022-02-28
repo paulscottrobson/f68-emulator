@@ -1,0 +1,12 @@
+-cc=vbccvidcore -short-double  -I%%VBCC%%/targets/vidcore-linux/include -quiet %s -o= %s %s -O=%ld
+-ccv=vbccvidcore -short-double  -I%%VBCC%%/targets/vidcore-linux/include %s -o= %s %s -O=%ld
+-as=vasmvidcore_std -quiet -Fvobj %s -o %s
+-asv=vasmvidcore_std -Fvobj -v %s -o %s
+-rm=del %s
+-rmv=del %s
+-ld=vlink -M >mapfile -q -Cvbcc -T%%VBCC%%/targets/vidcore-linux/vlink.cmd -L%%VBCC%%/targets/vidcore-linux/lib -b rawseg %%VBCC%%/targets/vidcore-linux/lib/startup.o %s %s -lvc -o %s 
+-ldv=vlink -M >mapfile -q -v -Cvbcc -T%%VBCC%%/targets/vidcore-linux/vlink.cmd -L%%VBCC%%/targets/vidcore-linux/lib -b rawseg  %%VBCC%%/targets/vidcore-linux/lib/startup.o %s %s -lvc -o %s 
+-l2=vlink -q -b rawseg %s %s -o %s 
+-l2v=vlink -q -v -b rawseg %s %s -o %s 
+
+

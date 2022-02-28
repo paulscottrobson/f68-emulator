@@ -1,0 +1,16 @@
+-elf
+-safe-fp
+-cc=vbcci386 -quiet %s -o= %s %s -O=%ld -I%%VBCC%%/targets/i386-netbsd/include -I/usr/local/include/i386-netbsd/Xinclude
+-ccv=vbcci386 %s -o= %s %s -O=%ld -I%%VBCC%%/targets/i386-netbsd/include -I/usr/local/include/i386-netbsd/Xinclude
+-as=vasmx86_std -quiet -Felf %s -o %s
+-asv=vasmx86_std -Felf %s -o %s
+-rm=del %s
+-rmv=del %s
+-ld=vlink -belf32i386 -nostdlib -T%%VBCC%%/targets/i386-netbsd/lib/script -L%%VBCC%%/targets/i386-netbsd/lib %%VBCC%%/targets/i386-netbsd/lib/startup.o %s %s -lvc -o %s
+-l2=vlink -belf32i386 -nostdlib -T%%VBCC%%/targets/i386-netbsd/lib/script -L%%VBCC%%/targets/i386-netbsd/lib %s %s -o %s
+-ldv=vlink -belf32i386 -t -nostdlib -T%%VBCC%%/targets/i386-netbsd/lib/script -L%%VBCC%%/targets/i386-netbsd/lib %%VBCC%%/targets/i386-netbsd/lib/startup.o %s %s -lvc -o %s
+-l2v=vlink -belf32i386 -t -nostdlib -T%%VBCC%%/targets/i386-netbsd/lib/script -L%%VBCC%%/targets/i386-netbsd/lib %s %s -o %s
+-ldnodb=-s -x
+-ul=-l%s
+-cf=-F%s
+-ml=1000

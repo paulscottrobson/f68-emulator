@@ -1,0 +1,9 @@
+-cc=vbcchc12 -cpu=6809 -pcrel -drel -I%%VBCC%%/targets/6809-os9/include -quiet %s -o= %s %s -O=%ld
+-ccv=vbcchc12 -cpu=6809 -pcrel -drel -I%%VBCC%%/targets/6809-os9/include %s -o= %s %s -O=%ld
+-as=vasm6809_std -quiet -Fvobj -nowarn=62 -opt-branch -opt-offset %s -o %s
+-asv=vasm6809_std -Fvobj -nowarn=62 -opt-branch -opt-offset %s -o %s
+-rm=del %s
+-rmv=del %s
+-ld=vlink -bos9-6809 -L%%VBCC%%/targets/6809-os9/lib %%VBCC%%/targets/6809-os9/lib/startup.o %s %s -o %s -lvc -los9
+-ldv=vlink -bos9-6809 -t -L%%VBCC%%/targets/6809-os9/lib %%VBCC%%/targets/6809-os9/lib/startup.o %s %s -o %s -lvc -los9 -Mmapfile
+-ml=1000

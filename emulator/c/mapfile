@@ -1,0 +1,329 @@
+/Projects/f68-emulator/documents/..//vbcc/targets/a2560-elf/lib/libvc.a (_main.o) needed due to ___main
+
+Files:
+  startup.o:  CODE 20000(4e) hex
+  /Projects/f68-emulator/documents/..//vbcc/targets/a2560-elf/lib/libvc.a (_main.o):  CODE 20050(be), DATA 20910(4), BSS 20954(4) hex
+  syscalls.o:  CODE 20110(650) hex
+  io.o:  CODE 20760(17a), DATA 20914(40) hex
+  fileXWZVUX.o:  CODE 208dc(24) hex
+  INITEXIT:  .dtors 20900(8), .ctors 20908(8) hex
+
+
+Section mapping (numbers in hex):
+------------------------------
+  00020000 text  (size 900)
+           00020000 - 0002004e startup.o(CODE)
+           00020050 - 0002010e _main.o(CODE)
+           00020110 - 00020760 syscalls.o(CODE)
+           00020760 - 000208da io.o(CODE)
+           000208dc - 00020900 fileXWZVUX.o(CODE)
+------------------------------
+  00020900 .dtors  (size 8, allocated 0)
+           00020900 - 00020908 INITEXIT(.dtors)
+------------------------------
+  00020908 .ctors  (size 8, allocated 0)
+           00020908 - 00020910 INITEXIT(.ctors)
+------------------------------
+  00020910 data  (size 44)
+           00020910 - 00020914 _main.o(DATA)
+           00020914 - 00020954 io.o(DATA)
+------------------------------
+  00020954 bss  (size 4, allocated 0)
+           00020954 - 00020958 _main.o(BSS)
+
+
+Symbols of text:
+  0x00000000 l230: local abs, size 0
+  0x00000000 l10: local abs, size 0
+  0x00000000 l213: local abs, size 0
+  0x00000000 l13: local abs, size 0
+  0x00000000 l215: local abs, size 0
+  0x00000000 l15: local abs, size 0
+  0x00000000 l228: local abs, size 0
+  0x00000000 l8: local abs, size 0
+  0x00000004 l150: local abs, size 0
+  0x00000004 l50: local abs, size 0
+  0x00000004 l30: local abs, size 0
+  0x00000004 l233: local abs, size 0
+  0x00000004 l73: local abs, size 0
+  0x00000004 l235: local abs, size 0
+  0x00000004 l195: local abs, size 0
+  0x00000004 l75: local abs, size 0
+  0x00000004 l138: local abs, size 0
+  0x00000004 l118: local abs, size 0
+  0x00000004 l98: local abs, size 0
+  0x00000004 l78: local abs, size 0
+  0x00000004 l38: local abs, size 0
+  0x00000004 l18: local abs, size 0
+  0x00000004 l240: local abs, size 0
+  0x00000004 l220: local abs, size 0
+  0x00000004 l180: local abs, size 0
+  0x00000004 l140: local abs, size 0
+  0x00000004 l120: local abs, size 0
+  0x00000004 l100: local abs, size 0
+  0x00000004 l80: local abs, size 0
+  0x00000004 l40: local abs, size 0
+  0x00000004 l20: local abs, size 0
+  0x00000004 l123: local abs, size 0
+  0x00000004 l63: local abs, size 0
+  0x00000004 l43: local abs, size 0
+  0x00000004 l23: local abs, size 0
+  0x00000004 l3: local abs, size 0
+  0x00000004 l225: local abs, size 0
+  0x00000004 l185: local abs, size 0
+  0x00000004 l145: local abs, size 0
+  0x00000004 l125: local abs, size 0
+  0x00000004 l105: local abs, size 0
+  0x00000004 l65: local abs, size 0
+  0x00000004 l45: local abs, size 0
+  0x00000004 l25: local abs, size 0
+  0x00000004 l5: local abs, size 0
+  0x00000004 l148: local abs, size 0
+  0x00000004 l48: local abs, size 0
+  0x00000004 l22: local abs, size 0
+  0x00000004 l24: local abs, size 0
+  0x00000004 l7: local abs, size 0
+  0x00000004 l9: local abs, size 0
+  0x00000008 l31: local abs, size 0
+  0x00000008 l43: local abs, size 0
+  0x00000008 l210: local abs, size 0
+  0x00000008 l190: local abs, size 0
+  0x00000008 l170: local abs, size 0
+  0x00000008 l175: local abs, size 0
+  0x00000008 l155: local abs, size 0
+  0x00000008 l135: local abs, size 0
+  0x00000008 l95: local abs, size 0
+  0x00000008 l35: local abs, size 0
+  0x00000008 l200: local abs, size 0
+  0x00000008 l165: local abs, size 0
+  0x0000000c l18: local abs, size 0
+  0x0000000c l70: local abs, size 0
+  0x0000000c l55: local abs, size 0
+  0x0000000c l160: local abs, size 0
+  0x0000000c l60: local abs, size 0
+  0x0000000c l205: local abs, size 0
+  0x0000000c l85: local abs, size 0
+  0x0000000c l55: local abs, size 0
+  0x0000000c l35: local abs, size 0
+  0x0000000c l47: local abs, size 0
+  0x00000010 l130: local abs, size 0
+  0x00000010 l110: local abs, size 0
+  0x00000010 l90: local abs, size 0
+  0x00000010 l115: local abs, size 0
+  0x00000018 l17: local abs, size 0
+  0x0000001c l83: local abs, size 0
+  0x0000001c l53: local abs, size 0
+  0x00000400 l193: local abs, size 0
+  0x00000400 l238: local abs, size 0
+  0x00000400 l218: local abs, size 0
+  0x00000400 l178: local abs, size 0
+  0x00000400 l223: local abs, size 0
+  0x00000400 l183: local abs, size 0
+  0x00000400 l143: local abs, size 0
+  0x00000400 l103: local abs, size 0
+  0x00000400 l28: local abs, size 0
+  0x00000404 l173: local abs, size 0
+  0x00000404 l153: local abs, size 0
+  0x00000404 l133: local abs, size 0
+  0x00000404 l93: local abs, size 0
+  0x00000404 l33: local abs, size 0
+  0x00000404 l198: local abs, size 0
+  0x00000404 l163: local abs, size 0
+  0x0000040c l53: local abs, size 0
+  0x0000040c l58: local abs, size 0
+  0x0000040c l68: local abs, size 0
+  0x0000040c l33: local abs, size 0
+  0x0000040c l45: local abs, size 0
+  0x0000041c l113: local abs, size 0
+  0x0000041c l128: local abs, size 0
+  0x0000041c l108: local abs, size 0
+  0x0000041c l88: local abs, size 0
+  0x00000c00 l41: local abs, size 0
+  0x00000c00 l29: local abs, size 0
+  0x00000c00 l208: local abs, size 0
+  0x00000c00 l188: local abs, size 0
+  0x00000c00 l168: local abs, size 0
+  0x00000c04 l16: local abs, size 0
+  0x00000c04 l203: local abs, size 0
+  0x00001c00 l158: local abs, size 0
+  0x00001c1c l15: local abs, size 0
+  0x00020014 loop: local reloc, size 0
+  0x0002001a empty: local reloc, size 0
+  0x00020020 ___exit: global reloc, size 0
+  0x00020026 _syscall: global reloc, size 0
+  0x00020050 __Exit: global reloc, size 0
+  0x0002006a l12: local reloc, size 0
+  0x00020076 l14: local reloc, size 0
+  0x0002007a l13: local reloc, size 0
+  0x00020088 l15: local reloc, size 0
+  0x0002009c _exit: global reloc, size 0
+  0x000200ba l27: local reloc, size 0
+  0x000200c6 l28: local reloc, size 0
+  0x000200ce l23: local reloc, size 0
+  0x000200d4 ___main: global reloc, size 0
+  0x000200ea l39: local reloc, size 0
+  0x000200f2 l40: local reloc, size 0
+  0x00020110 _sys_exit: global reloc, size 0
+  0x00020126 l1: local reloc, size 0
+  0x0002012c _sys_int_enable_all: global reloc, size 0
+  0x00020138 l6: local reloc, size 0
+  0x0002013c _sys_int_disable_all: global reloc, size 0
+  0x00020148 l11: local reloc, size 0
+  0x0002014c _sys_int_disable: global reloc, size 0
+  0x00020164 l16: local reloc, size 0
+  0x00020168 _sys_int_enable: global reloc, size 0
+  0x00020180 l21: local reloc, size 0
+  0x00020184 _sys_get_info: global reloc, size 0
+  0x00020198 l26: local reloc, size 0
+  0x0002019c _sys_int_register: global reloc, size 0
+  0x000201be l31: local reloc, size 0
+  0x000201c4 _sys_int_pending: global reloc, size 0
+  0x000201dc l36: local reloc, size 0
+  0x000201e0 _sys_int_clear: global reloc, size 0
+  0x000201f8 l41: local reloc, size 0
+  0x000201fc _sys_chan_read_b: global reloc, size 0
+  0x00020214 l46: local reloc, size 0
+  0x00020218 _sys_chan_read: global reloc, size 0
+  0x00020244 l51: local reloc, size 0
+  0x0002024c _sys_chan_readline: global reloc, size 0
+  0x00020278 l56: local reloc, size 0
+  0x00020280 _sys_chan_write_b: global reloc, size 0
+  0x00020298 l61: local reloc, size 0
+  0x0002029c _sys_chan_write: global reloc, size 0
+  0x000202c8 l66: local reloc, size 0
+  0x000202d0 _sys_chan_status: global reloc, size 0
+  0x000202e8 l71: local reloc, size 0
+  0x000202ec _sys_chan_flush: global reloc, size 0
+  0x00020304 l76: local reloc, size 0
+  0x00020308 _sys_chan_seek: global reloc, size 0
+  0x00020334 l81: local reloc, size 0
+  0x0002033c _sys_chan_ioctrl: global reloc, size 0
+  0x00020372 l86: local reloc, size 0
+  0x00020378 _sys_chan_open: global reloc, size 0
+  0x0002039a l91: local reloc, size 0
+  0x000203a0 _sys_chan_close: global reloc, size 0
+  0x000203b8 l96: local reloc, size 0
+  0x000203bc _sys_bdev_register: global reloc, size 0
+  0x000203d0 l101: local reloc, size 0
+  0x000203d4 _sys_bdev_read: global reloc, size 0
+  0x00020406 l106: local reloc, size 0
+  0x0002040c _sys_bdev_write: global reloc, size 0
+  0x0002043e l111: local reloc, size 0
+  0x00020444 _sys_bdev_status: global reloc, size 0
+  0x0002045c l116: local reloc, size 0
+  0x00020460 _sys_bdev_flush: global reloc, size 0
+  0x00020478 l121: local reloc, size 0
+  0x0002047c _sys_bdev_ioctrl: global reloc, size 0
+  0x000204b2 l126: local reloc, size 0
+  0x000204b8 _sys_fsys_open: global reloc, size 0
+  0x000204da l131: local reloc, size 0
+  0x000204e0 _sys_fsys_close: global reloc, size 0
+  0x000204f8 l136: local reloc, size 0
+  0x000204fc _sys_fsys_opendir: global reloc, size 0
+  0x00020510 l141: local reloc, size 0
+  0x00020514 _sys_fsys_closedir: global reloc, size 0
+  0x0002052c l146: local reloc, size 0
+  0x00020530 _sys_fsys_readdir: global reloc, size 0
+  0x00020552 l151: local reloc, size 0
+  0x00020558 _sys_fsys_findfirst: global reloc, size 0
+  0x0002057c l156: local reloc, size 0
+  0x00020584 _sys_fsys_findnext: global reloc, size 0
+  0x000205a6 l161: local reloc, size 0
+  0x000205ac _sys_fsys_get_label: global reloc, size 0
+  0x000205ca l166: local reloc, size 0
+  0x000205d0 _sys_fsys_set_label: global reloc, size 0
+  0x000205f2 l171: local reloc, size 0
+  0x000205f8 _sys_fsys_mkdir: global reloc, size 0
+  0x0002060c l176: local reloc, size 0
+  0x00020610 _sys_fsys_delete: global reloc, size 0
+  0x00020624 l181: local reloc, size 0
+  0x00020628 _sys_fsys_rename: global reloc, size 0
+  0x00020646 l186: local reloc, size 0
+  0x0002064c _sys_fsys_set_cwd: global reloc, size 0
+  0x00020660 l191: local reloc, size 0
+  0x00020664 _sys_fsys_get_cwd: global reloc, size 0
+  0x00020686 l196: local reloc, size 0
+  0x0002068c _sys_fsys_load: global reloc, size 0
+  0x000206b0 l201: local reloc, size 0
+  0x000206b8 _sys_fsys_register_loader: global reloc, size 0
+  0x000206d6 l206: local reloc, size 0
+  0x000206dc _sys_time_jiffies: global reloc, size 0
+  0x000206e8 l211: local reloc, size 0
+  0x000206ec _sys_rtc_set_time: global reloc, size 0
+  0x00020700 l216: local reloc, size 0
+  0x00020704 _sys_rtc_get_time: global reloc, size 0
+  0x00020718 l221: local reloc, size 0
+  0x0002071c _sys_kbd_scancode: global reloc, size 0
+  0x00020728 l226: local reloc, size 0
+  0x0002072c _sys_err_message: global reloc, size 0
+  0x00020744 l231: local reloc, size 0
+  0x00020748 _sys_kbd_layout: global reloc, size 0
+  0x0002075c l236: local reloc, size 0
+  0x00020760 ___open: global reloc, size 0
+  0x00020774 l4: local reloc, size 0
+  0x0002079c l8: local reloc, size 0
+  0x000207ac l7: local reloc, size 0
+  0x000207ac l9: local reloc, size 0
+  0x000207ae l5: local reloc, size 0
+  0x000207b4 l6: local reloc, size 0
+  0x000207b8 l10: local reloc, size 0
+  0x000207c8 l11: local reloc, size 0
+  0x000207cc l12: local reloc, size 0
+  0x000207d2 l13: local reloc, size 0
+  0x000207d4 l14: local reloc, size 0
+  0x000207d4 l2: local reloc, size 0
+  0x000207dc ___close: global reloc, size 0
+  0x000207e8 l20: local reloc, size 0
+  0x000207f6 l18: local reloc, size 0
+  0x000207f6 l21: local reloc, size 0
+  0x000207fc ___read: global reloc, size 0
+  0x00020810 l27: local reloc, size 0
+  0x00020824 l28: local reloc, size 0
+  0x0002082a l30: local reloc, size 0
+  0x00020842 l31: local reloc, size 0
+  0x00020844 l32: local reloc, size 0
+  0x00020844 l25: local reloc, size 0
+  0x00020844 l29: local reloc, size 0
+  0x0002084c ___write: global reloc, size 0
+  0x00020862 l40: local reloc, size 0
+  0x00020868 l38: local reloc, size 0
+  0x0002087c l39: local reloc, size 0
+  0x00020880 l42: local reloc, size 0
+  0x00020884 l43: local reloc, size 0
+  0x0002089a l36: local reloc, size 0
+  0x0002089a l41: local reloc, size 0
+  0x0002089a l44: local reloc, size 0
+  0x000208a0 ___seek: global reloc, size 0
+  0x000208b6 l50: local reloc, size 0
+  0x000208d2 l51: local reloc, size 0
+  0x000208d4 l52: local reloc, size 0
+  0x000208d4 l48: local reloc, size 0
+  0x000208dc _main: global reloc, size 0
+  0x000208ea l3: local reloc, size 0
+  0x000208f0 l6: local reloc, size 0
+  0x000208f2 l4: local reloc, size 0
+  0x000208fa l5: local reloc, size 0
+  0x000208fc l1: local reloc, size 0
+
+Symbols of .dtors:
+  0x00020900 ___DTOR_LIST__: global reloc object, size 8
+
+Symbols of .ctors:
+  0x00020908 ___CTOR_LIST__: global reloc object, size 8
+
+Symbols of data:
+  0x00020910 l21: local reloc, size 0
+  0x00020914 l1: local reloc, size 0
+
+Symbols of bss:
+  0x00020954 ___firstexit: global reloc, size 0
+
+Linker symbols:
+  0x00020000 RAMSTART: global abs, size 0
+  0x00030000 RAMSIZE: global abs, size 0
+  0x00000400 STACKLEN: global abs, size 0
+  0x00020958 ___heap: global abs, size 0
+  0x0004fc00 ___heapend: global abs, size 0
+  0x00020954 ___BSSSTART: global abs, size 0
+  0x00000004 ___BSSSIZE: global abs, size 0
+  0x00050000 ___STACK: global abs, size 0

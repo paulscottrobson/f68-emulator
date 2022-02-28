@@ -1,0 +1,22 @@
+-elf
+-no-regnames
+-no-multiple-ccs
+-madd
+-c99
+-use-commons
+-cc=vbccppc -quiet %s -o= %s %s -O=%ld -I%%VBCC%%/targets/ppc-openfirm/include
+-ccv=vbccppc %s -o= %s %s -O=%ld -I%%VBCC%%/targets/ppc-openfirm/include
+-as=vasmppc_std -quiet -Felf -opt-branch -no-regnames %s -o %s
+-asv=vasmppc_std -Felf -opt-branch -no-regnames %s -o %s
+-isc=vscppc -quiet %s %s
+-iscv=vscppc %s %s
+-rm=del %s
+-rmv=del %s
+-ld=vlink -belf32ppcbe -n -Cvbccelf -nostdlib -T%%VBCC%%/targets/ppc-openfirm/lib/vlink.cmd -L%%VBCC%%/targets/ppc-openfirm/lib %%VBCC%%/targets/ppc-openfirm/lib/startup.o %s %s -lvc -lofw -o %s
+-l2=vlink -belf32ppcbe -n -Cvbccelf -nostdlib -T%%VBCC%%/targets/ppc-openfirm/lib/vlink.cmd -L%%VBCC%%/targets/ppc-openfirm/lib %s %s -o %s
+-ldv=vlink -belf32ppcbe -t -n -Cvbccelf -nostdlib -T%%VBCC%%/targets/ppc-openfirm/lib/vlink.cmd -L%%VBCC%%/targets/ppc-openfirm/lib %%VBCC%%/targets/ppc-openfirm/lib/startup.o %s %s -lvc -lofw -o %s
+-l2v=vlink -belf32ppcbe -t -n -Cvbccelf -nostdlib -T%%VBCC%%/targets/ppc-openfirm/lib/vlink.cmd -L%%VBCC%%/targets/ppc-openfirm/lib %s %s -o %s
+-ldnodb=-s -x
+-ul=-l%s
+-cf=-F%s
+-ml=500

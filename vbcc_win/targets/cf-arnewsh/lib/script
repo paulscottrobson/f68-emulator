@@ -1,0 +1,23 @@
+SECTIONS {
+	. = 0x2000;
+	.text: {
+		*(.text CODE)
+		. = ALIGN(4);
+	}
+	.data: {
+		VBCC_CONSTRUCTORS
+		*(.rodata*)
+		*(.data DATA)
+		_SDA_BASE_ = . + 0x8000;
+		PROVIDE(_LinkerDB = . + 0x8000);
+		*(.sdata* __MERGED)
+		PROVIDE(___edata = ALIGN(4));
+	}
+	.bss: {
+		*(.sbss)
+		*(.scommon)
+		*(.bss .udata BSS)
+		*(COMMON)
+		PROVIDE(___end = ALIGN(4));
+	}
+}

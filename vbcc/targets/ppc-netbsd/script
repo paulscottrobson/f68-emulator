@@ -1,0 +1,99 @@
+ENTRY(_start)
+
+SECTIONS
+{
+  . = 0x01800000 + SIZEOF_HEADERS;
+  /* Read-only sections, merged into text segment: */
+  .interp         : { *(.interp) }
+  .note.netbsd.ident : { *(.note.netbsd.ident) }
+  .hash           : { *(.hash) }
+  .dynsym         : { *(.dynsym) }
+  .dynstr         : { *(.dynstr) }
+  .gnu.version    : { *(.gnu.version) }
+  .gnu.version_d  : { *(.gnu.version_d) }
+  .gnu.version_r  : { *(.gnu.version_r) }
+  .rela.dyn       : { *(.rela.dyn) }
+  .rela.plt       : { *(.rela.plt) }
+  .init           : { *(.init) } = 0
+  .text           : { *(.text .gnu.linkonce.t.*) } = 0
+  .fini           : { *(.fini) } = 0
+
+  /*
+  PROVIDE(__etext = .);
+  PROVIDE(_etext = .);
+  PROVIDE(etext = .);
+  */
+
+  .rodata         : { *(.rodata .rodata.* .gnu.linkonce.r.*) }
+  .sdata2         : {
+    PROVIDE (_SDA2_BASE_ = . + 0x8000);
+    *(.sdata2 .sdata2.* .gnu.linkonce.s2.*)
+  }
+  .sbss2          : { *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*) }
+
+  /* data segment: */
+  . = . + 0x10000;
+  . = ALIGN(4);
+  .dynamic        : { *(.dynamic) }
+  .data           : {
+    *(.data .data.* .gnu.linkonce.d.*)
+    VBCC_CONSTRUCTORS_ELF
+  }
+  .ctors          : { *(.ctors .ctors.*) }
+  .dtors          : { *(.dtors .dtors.*) }
+  .got            : { *(.got.plt) *(.got) }
+  .sdata          : {
+    PROVIDE(_LinkerDB = . + 0x8000);
+    PROVIDE(_SDA_BASE_ = . + 0x8000);
+    *(.sdata .sdata.* .tocd .gnu.linkonce.s.*)
+  }
+
+  /*
+  PROVIDE(_edata = .);
+  PROVIDE(edata = .);
+  PROVIDE(__bss_start = .);
+  */
+
+  .sbss           : {
+    PROVIDE(__sbss_start = .);
+    PROVIDE(___sbss_start = .);
+    *(.sbss .sbss.* .gnu.linkonce.sb.*)
+    *(.scommon)
+    PROVIDE(__sbss_end = .);
+    PROVIDE(___sbss_end = .);
+  }
+  .plt            : { *(.plt) }
+  .bss            : {
+    *(.bss .bss.* .gnu.linkonce.b.*)
+    *(COMMON)
+  }
+
+  . = ALIGN(4);
+  PROVIDE(_end = .);
+  PROVIDE(end = .);
+
+  .comment      0 : { *(.comment) }
+
+  /* DWARF debug sections.
+     Symbols in the DWARF debugging sections are relative to the beginning
+     of the section so we begin them at 0.  */
+  /* DWARF 1 */
+  .debug          0 : { *(.debug) }
+  .line           0 : { *(.line) }
+  /* GNU DWARF 1 extensions */
+  .debug_srcinfo  0 : { *(.debug_srcinfo) }
+  .debug_sfnames  0 : { *(.debug_sfnames) }
+  /* DWARF 1.1 and DWARF 2 */
+  .debug_aranges  0 : { *(.debug_aranges) }
+  .debug_pubnames 0 : { *(.debug_pubnames) }
+  /* DWARF 2 */
+  .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+  .debug_abbrev   0 : { *(.debug_abbrev) }
+  .debug_line     0 : { *(.debug_line) }
+  .debug_frame    0 : { *(.debug_frame) }
+  .debug_str      0 : { *(.debug_str) }
+  .debug_loc      0 : { *(.debug_loc) }
+  .debug_macinfo  0 : { *(.debug_macinfo) }
+  /* DWARF 2.1 */
+  .debug_ranges   0 : { *(.debug_ranges) }
+}

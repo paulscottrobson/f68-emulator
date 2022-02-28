@@ -1,0 +1,12 @@
+-safe-fp
+-elf
+-cc=vbcci386 -quiet -I%%VBCC%%/targets/i386-linux/include %s -o= %s %s -O=%ld
+-ccv=vbcci386 -I%%VBCC%%/targets/i386-linux/include %s -o= %s %s -O=%ld
+-as=vasmx86_std -Felf -quiet -nowarn=62 %s -o %s
+-asv=vasmx86_std -Felf -nowarn=62 %s -o %s
+-rm=del %s
+-rmv=del %s
+-ld=vlink -Cvbccelf -belf32i386 -T%%VBCC%%/targets/i386-linux/vlink.cmd -L%%VBCC%%/targets/i386-linux/lib %%VBCC%%/targets/i386-linux/lib/startup.o %s %s -lvc -o %s -e __cstart
+-ldv=vlink -v -Cvbccelf -belf32i386 -T%%VBCC%%/targets/i386-linux/vlink.cmd -L%%VBCC%%/targets/i386-linux/lib %%VBCC%%/targets/i386-linux/lib/startup.o %s %s -lvc -o %s -e __cstart
+-l2=vlink -belf32i386 -T%%VBCC%%/targets/i386-linux/vlink.cmd -L%%VBCC%%/targets/i386-linux/lib %s %s -o %s -e __cstart
+-l2v=vlink -v -belf32i386 -T%%VBCC%%/targets/i386-linux/vlink.cmd -L%%VBCC%%/targets/i386-linux/lib %s %s -o %s -e __cstart

@@ -1,0 +1,21 @@
+						K 						U
+00000000			4M SRAM 				4M SRam
+00400000 			(Unused) 				(Unused)
+00B00000			Video RAM Buffer A 		GAVIN
+00B20000 					"" 				BEATRIX
+00B40000 					"" 				VICKY II
+00B60000 					"" 				Text Memory (16k)
+00B64000 					"" 				Text Colour Memory (16k)
+00BF0000					"" 				Expansion Bus Chip Select
+00C00000 			Video RAM Buffer B 		Video RAM 2Meg
+00E00000					"" 				Flash 2Meg
+01000000 			(Unused) 				(Repeat map)
+00200000			64M SDRAM 
+00600000			(Unused)
+FEC00000 			GAVIN
+FEC20000			BEATRIX
+FEC40000			VICKY III Channel A
+FEC80000 			VICKY III Channel B
+FFC00000 			4M Flash
+
+

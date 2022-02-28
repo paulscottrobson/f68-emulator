@@ -1,0 +1,14 @@
+-cc=vbccm68k -quiet -cpu=5474 %s -o= %s %s -O=%ld -I$VBCC/targets/cf-atari/include
+-ccv=vbccm68k -cpu=5474 %s -o= %s %s -O=%ld -I$VBCC/targets/cf-atari/include
+-as=vasmm68k_mot -quiet -mv4e -Faout -phxass -nowarn=62 %s -o %s
+-asv=vasmm68k_mot -mv4e -Faout -phxass -nowarn=62 %s -o %s
+-rm=rm -f %s
+-rmv=rm %s
+-ld=vlink -baoutmint -tos-flags 7 -x -Bstatic -Cvbcc -P__stksize -nostdlib $VBCC/targets/cf-atari/lib/startup.o %s %s -L$VBCC/targets/cf-atari/lib -lvc -o %s
+-l2=vlink -baoutmint -tos-flags 7 -x -Bstatic -Cvbcc -P__stksize -nostdlib %s %s -L$VBCC/targets/cf-atari/lib -o %s
+-ldv=vlink -baoutmint -tos-flags 7 -t -x -Bstatic -Cvbcc -P__stksize -nostdlib $VBCC/targets/cf-atari/lib/startup.o %s %s -L$VBCC/targets/cf-atari/lib -lvc -o %s
+-l2v=vlink -baoutmint -tos-flags 7 -t -x -Bstatic -Cvbcc -P__stksize -nostdlib %s %s -L$VBCC/targets/cf-atari/lib -o %s
+-ldnodb=-s
+-ul=-l%s
+-cf=-F%s
+-ml=1000

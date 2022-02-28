@@ -1,0 +1,98 @@
+vbcc multi-target binary distribution
+
+This is a binary distribution of vbcc/vasm that allows
+cross-compilation and cross-assembly to a variety of targets
+supported by vbcc/vasm. Note that for some targets (notably
+6502-based and Amiga/Atari OSs) there are separate
+distributions with extra support (samples, installation scripts
+etc.).
+
+The following architectures are supported:
+
+- 6502/65C02: vasm + vbcc
+  libc: C64, Atari 8bit, BBC Micro/Master
+        NES, MEGA65, Commander X16,
+
+- 6809/6309/68hc12: vasm + vbcc
+  libc: simulator/freestanding, OS9 (tbc)
+
+- 6800/6801/6803/6808/68hc11: vasm
+
+- C16X/ST10: vasm + vbcc
+  libc: MM167, freestanding
+
+- Coldfire: vasm + vbcc
+  libc: MINT, Arnewsh 5206
+
+- i386: vasm + vbcc
+  libc: Linux, NetBSD
+
+- M68k: vasm + vbcc
+  libc: AmigaOS, Atari TOS, MINT, Atari Jaguar
+
+- PowerPC: vasm + vbcc
+  libc: AmigaOS, PowerUp, WarpOS, MorphOS
+        Linux, NetBSD, OpenFirmware
+
+- QNICE: vasm + vbcc
+  libc: monitor, freestanding
+
+- VideoCore IV (RasperryPi GPU): vasm + vbcc
+  libc: Linux (probably outdated), freestanding
+
+- DEC Alpha: vbcc
+  libc: compatible with Linux (probably outdated)
+
+- 832 FPGA: vbcc
+  libc: n/a
+
+- ARM: vasm
+
+- Jaguar RISC: vasm
+
+- PDP11: vasm
+
+- TR3200: vasm
+
+- Z80: vasm
+
+- Infocom Z-machine: vbcc
+  libc: n/a
+
+
+
+To use the compiler on Windows:
+
+  set VBCC=<path-to-vbcc-dir>
+  set PATH=%VBCC%\bin;%PATH%
+
+On Linux, use something like:
+
+  export VBCC=<path-to-vbcc-dir>
+  export PATH=$VBCC/bin:"$PATH"
+
+Compiling works pretty much like most compilers, e.g.:
+
+  vc +<target> file.c -o binary
+
+For <target> substitute one of the available target
+configurations from the config subdirectory.
+
+Further information on vbcc can be found on
+
+  http://www.compilers.de/vbcc
+
+and in the vbcc.pdf included here. Apart from the general sections on
+the compiler, be sure to have a look at the ones for the CPU backend
+you are using and the section for your target in the C library chapter.
+
+
+LEGAL
+
+Please consult the vbcc.pdf regarding terms of usage.
+
+
+For questions, results etc., reach me at: vb@compilers.de
+
+
+Volker Barthelmann

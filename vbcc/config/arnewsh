@@ -1,0 +1,14 @@
+-cc=vbccm68k -quiet -cpu=5206 %s -o= %s %s -O=%ld -I/$VBCC/targets/cf-arnewsh/include
+-ccv=vbccm68k -cpu=5206 %s -o= %s %s -O=%ld -I$VBCC/targets/cf-arnewsh/include
+-as=vasmm68k_mot -quiet -phxass -m5206 -Fvobj %s -o %s
+-asv=vasmm68k_mot -phxass -m5206 -Fvobj %s -o %s
+-rm=rm -f %s
+-rmv=rm %s
+-ld=vlink -bsrec37 -x -Bstatic -Cvbcc -nostdlib -T$VBCC/targets/cf-arnewsh/lib/script $VBCC/targets/cf-arnewsh/lib/startup.o %s %s -L$VBCC/targets/cf-arnewsh/lib -lvc -o %s
+-l2=vlink -bsrec37 -x -Bstatic -Cvbcc -nostdlib -T$VBCC/targets/cf-arnewsh/lib/script%s %s -L$VBCC/targets/cf-arnewsh/lib -o %s
+-ldv=vlink -bsrec37 -t -x -Bstatic -Cvbcc -nostdlib -T$VBCC//targets/cf-arnewsh/lib/script $VBCC/targets/cf-arnewsh/lib/startup.o %s %s -L$VBCC/targets/cf-arnewsh/lib -lvc -o %s
+-l2v=vlink -bsrec37 -t -x -Bstatic -Cvbcc -nostdlib -T$VBCC/targets/cf-arnewsh/lib/script%s %s -L$VBCC/targets/cf-arnewsh/lib -o %s
+-ldnodb=-s
+-ul=-l%s
+-cf=-F%s
+-ml=1000

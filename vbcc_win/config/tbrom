@@ -1,0 +1,15 @@
+-cc=vbcc6502 -I%%VBCC%%/targets/6502-nes/include -quiet -mainargs %s -o= %s %s -O=%ld
+-ccv=vbcc6502 -I%%VBCC%%/targets/6502-nes/include -mainargs %s -o= %s %s -O=%ld
+-common-banknr=255
+-dontwarn=103
+-unsigned-char
+-as=vasm6502_oldstyle -quiet -nowarn=62 -opt-branch -Fvobj %s -o %s
+-asv=vasm6502_oldstyle -nowarn=62 -Fvobj -opt-branch %s -o %s
+-rm=del %s
+-rmv=del %s
+-cpr=vcpr6502 -quiet %s %s
+-cprv=vcpr6502 %s %s
+-ld=vlink -b rawbin1 -Cvbcc -T%%VBCC%%/targets/6502-nes/tbrom512-128.cmd -L%%VBCC%%/targets/6502-nes/lib %%VBCC%%/targets/6502-nes/lib/startup.o %s %s -o %s -lmapper4 -lvc
+-ldv=vlink -b rawbin1 -Cvbcc -T%%VBCC%%/targets/6502-nes/tbrom512-128.cmd -L%%VBCC%%/targets/6502-nes/lib %%VBCC%%/targets/6502-nes/lib/startup.o %s %s  -o %s -lmapper4 -lvc -Mmapfile
+-l2=vlink -b rawbin1 -Cvbcc -T%%VBCC%%/targets/6502-nes/tbrom512-128.cmd -L%%VBCC%%/targets/6502-nes/lib %s %s -o %s -lmapper4
+-l2v=vlink -b rawbin1 -Cvbcc -T%%VBCC%%/targets/6502-nes/tbrom512-128.cmd -L%%VBCC%%/targets/6502-nes/lib %s %s -o %s -lmapper4 -Mmapfile
