@@ -65,22 +65,10 @@ class HardwareAccess(object):
 class BasicConfiguration(object):
 	def __init__(self,source):
 		self.accessList = []
-		self.setup = { 	"CPU":"68000",
-						"ADDRESS_MASK":"FFFFFFFF",
-						"FLASH_ROM":None,
-						"HARDWARE_START":None,
-						"HARDWARE_END":None,
-						"VRAM_START":None,
-						"VRAM_END":None,
-						"BEATRIX":None,
-						"GAVIN":None,
-						"VICKY3B":None,
-						"VICKY3A":None
-		}
+		self.setup = { 	}
 		for s in source:
 			m = re.match("^([A-Z0-9\\_]+)\\s*\\=\\s*(.*)$",s)
 			if m is not None:
-				assert m.group(1) in self.setup,"Unknown key "+m.group(1)
 				self.setup[m.group(1)] = m.group(2).strip()
 			else:
 				self.accessList.append(HardwareAccess(s))
@@ -95,6 +83,9 @@ class BasicConfiguration(object):
 		h.write("#define PROCESSOR_TYPE (M68K_CPU_TYPE_{0})\n\n".format(self.setup["CPU"]))
 		h.write("#define VRAM_START (0x{0})\n".format(self.setup["VRAM_START"]))
 		h.write("#define VRAM_END (0x{0})\n\n".format(self.setup["VRAM_END"]))
+		h.write("#define FLASH_ADDRESS (0x{0})\n".format(self.setup["FLASH_ADDRESS"]))
+		h.write("#define FLASH_SIZE (0x{0})\n\n".format(self.setup["FLASH_SIZE"]))
+		h.write("#define SRAM_END (0x{0})\n\n".format(self.setup["SRAM_SIZE"]))
 
 
 		assert self.setup["FLASH_ROM"] is not None,"No ROM defined"
@@ -179,6 +170,6 @@ bc.render(open("../include/generated/memorymap.h".replace("/",os.sep),"w"))
 for size in ["BYTE","WORD","LONG"]:
 	for device in ["GAVIN","BEATRIX","VICKY3A","VICKY3B"]:
 		for direction in ["READ","WRITE"]:
-			fName = ("../include/generated/hw_{0}_{1}_{2}.h".format(device,direction,size)).lower()
+			fName = ("../include/generated/hardware/hw_{0}_{1}_{2}.h".format(device,direction,size)).lower()
 			h = open(fName.replace("/",os.sep),"w")
 			bc.renderAccessors(h,device,direction,size)

@@ -12,7 +12,7 @@
 #ifndef _DEBUG_SYS_H
 #define _DEBUG_SYS_H
 
-#define DEBUG_ADDRESS_MASK 	(0xFFFFFFFF)
+
 #define DW_WIDTH  		(64)
 #define DW_HEIGHT		(32)
 
@@ -38,7 +38,7 @@
 #define DEBUG_GETOVERBREAK() CPUGetStepOverBreakpoint()								// Where would we break to step over here. (0 == single step)
 
 #define DEBUG_RAMSTART 		(0x0000)												// Initial RAM address for debugger.
-#define DEBUG_SHIFT(d,v)	((((d) << 4) | v) & DEBUG_ADDRESS_MASK)					// Shifting into displayed address.
+#define DEBUG_SHIFT(d,v)	((((d) << 4) | v) & ADDRESS_MASK)						// Shifting into displayed address.
 
 #define DEBUG_KEYMAP(k,r)	(k)
 

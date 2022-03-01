@@ -9,11 +9,7 @@
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************
 
-#include <stdio.h>
-#include <ctype.h>
-#include "gfx.h"
-#include "sys_processor.h"
-#include "debugger.h"
+#include <includes.h>
 	
 static int isInitialised = 0; 														// Flag to initialise first time
 static int addressSettings[] = { 0,0,0,0 }; 										// Adjustable values : Code, Data, Other, Break.

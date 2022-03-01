@@ -15,7 +15,10 @@
 //														   Timing
 // *******************************************************************************************************************************
 
+#define CPU_CLOCK 		(25)														// Clock speed (effective)
 #define FRAME_RATE		(60)														// Frames per second (60Hz)
+
+#define CYCLE_RATE 		(CPU_CLOCK*1000*1000)										// Cycles per second 
 #define CYCLES_PER_FRAME (CYCLE_RATE / FRAME_RATE) 									// Cycles per frame.
 
 // *******************************************************************************************************************************
@@ -82,7 +85,7 @@ void CPUExit(void) {}
 //												Execute a single instruction
 // *******************************************************************************************************************************
 
-BYTE8 CPUExecuteInstruction(void) {
+int CPUExecuteInstruction(void) {
 	#ifdef INCLUDE_DEBUGGING_SUPPORT
 	if (PC == 0xFFFFFFFF) CPUExit();
 	#endif
