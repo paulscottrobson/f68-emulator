@@ -29,6 +29,7 @@ void GAVIN_FlagInterrupt(int offset,int bitMask);
 void GAVIN_InsertMauFIFO(int mau);
 void GAVIN_UpdateTimers(int cycles,int frames);
 int GAVIN_IdentifyInterrupt(int irq);
+void GAVINClearKeyboardQueue(void);
 
 void MEMRenderDisplay(void);
 void HWRenderTextScreen(char vType,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYTE8 *lutMem,BYTE8 *fontMem,SDL_Rect *rDraw);
