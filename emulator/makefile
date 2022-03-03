@@ -38,6 +38,9 @@ text:emulator
 
 emulator: prebuild $(APPNAME)
 
+rom:
+	make -C ..$(S)rom
+
 prebuild:
 	make -C ..$(S)Musashi
 	make -C setup
@@ -52,9 +55,8 @@ clean:
 	$(CDEL) $(APPNAME) 
 	$(CDEL) src$(S)*.o 
 	$(CDEL) framework$(S)*.o cpu$(S)*.o cpu$(S)*.h
+	make -C ..$(S)rom clean
 
 $(APPNAME): $(SOURCES) 
 	$(CC) $(SOURCES) $(LDFLAGS) $(SDL_LDFLAGS) -o $@
 	
-rom:
-	cd ..$(S)FoenixMCP-a2560k$(S)src && sh build.sh

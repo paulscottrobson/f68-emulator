@@ -215,6 +215,7 @@ void log_setlevel(short level) {
  * message = the message to log
  */
 void log(short level, char * message) {
+//    *((long *)-4) = (long)message;
     if (level <= log_level) {
         print(log_channel, message);
         print_c(log_channel, '\n');

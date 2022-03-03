@@ -188,7 +188,7 @@ void initialize() {
 
     /* Initialize the indicators */
     ind_init();
-    log(LOG_INFO, "Indicators initialized");
+    log(LOG_INFO, ":[INIT]Indicators initialized");
 
     /* Initialize the interrupt system */
     int_init();
@@ -211,15 +211,15 @@ void initialize() {
     init_codec();
 
     cdev_init_system();   // Initialize the channel device system
-    log(LOG_INFO, "Channel device system ready.");
+    log(LOG_INFO, ":[INIT]Channel device system ready.");
 
     bdev_init_system();   // Initialize the channel device system
-    log(LOG_INFO, "Block device system ready.");
+    log(LOG_INFO, ":[INIT]Block device system ready.");
 
     if (res = con_install()) {
-        log_num(LOG_ERROR, "FAILED: Console installation", res);
+        log_num(LOG_ERROR, ":[INIT]FAILED: Console installation", res);
     } else {
-        log(LOG_INFO, "Console installed.");
+        log(LOG_INFO, ":[INIT]Console installed.");
     }
 
     /* Initialize the timers the MCP uses */
@@ -229,73 +229,74 @@ void initialize() {
     rtc_init();
 
     target_jiffies = sys_time_jiffies() + 300;     /* 5 seconds minimum */
-    log_num(LOG_DEBUG, "target_jiffies assigned: ", target_jiffies);
+    log_num(LOG_DEBUG, ":[INIT]target_jiffies assigned: ", target_jiffies);
 
     /* Enable all interrupts */
     int_enable_all();
-    log(LOG_TRACE, "Interrupts enabled");
+    log(LOG_TRACE, ":[INIT]Interrupts enabled");
 
     // /* Display the splash screen */
     load_splashscreen();
 
-    /* Play the SID test bong on the Gideon SID implementation */
-    sid_test_internal();
 
-    if (res = pata_install()) {
-        log_num(LOG_ERROR, "FAILED: PATA driver installation", res);
-    } else {
-        log(LOG_INFO, "PATA driver installed.");
-    }
+    // Play the SID test bong on the Gideon SID implementation 
+    // sid_test_internal();
 
-    if (res = sdc_install()) {
-        log_num(LOG_ERROR, "FAILED: SDC driver installation", res);
-    } else {
-        log(LOG_INFO, "SDC driver installed.");
-    }
+    // if (res = pata_install()) {
+    //     log_num(LOG_ERROR, ":[INIT]FAILED: PATA driver installation", res);
+    // } else {
+    //     log(LOG_INFO, ":[INIT]PATA driver installed.");
+    // }
+
+    // if (res = sdc_install()) {
+    //     log_num(LOG_ERROR, ":[INIT]FAILED: SDC driver installation", res);
+    // } else {
+    //     log(LOG_INFO, ":[INIT]SDC driver installed.");
+    // }
 
 // #if MODEL == MODEL_FOENIX_A2560K
 //     if (res = fdc_install()) {
-//         log_num(LOG_ERROR, "FAILED: Floppy drive initialization", res);
+//         log_num(LOG_ERROR, ":[INIT]FAILED: Floppy drive initialization", res);
 //     } else {
-//         log(LOG_INFO, "Floppy drive initialized.");
+//         log(LOG_INFO, ":[INIT]Floppy drive initialized.");
 //     }
 // #endif
 
     // At this point, we should be able to call into to console to print to the screens
 
-    if (res = ps2_init()) {
-        print_error(0, "FAILED: PS/2 keyboard initialization", res);
-    } else {
-        log(LOG_INFO, "PS/2 keyboard initialized.");
-    }
+    // if (res = ps2_init()) {
+    //     print_error(0, "FAILED: PS/2 keyboard initialization", res);
+    // } else {
+    //     log(LOG_INFO, ":[INIT]PS/2 keyboard initialized.");
+    // }
 
 #if MODEL == MODEL_FOENIX_A2560K
     if (res = kbdmo_init()) {
-        log_num(LOG_ERROR, "FAILED: A2560K built-in keyboard initialization", res);
+        log_num(LOG_ERROR, ":[INIT]FAILED: A2560K built-in keyboard initialization", res);
     } else {
-        log(LOG_INFO, "A2560K built-in keyboard initialized.");
+        log(LOG_INFO, ":[INIT]A2560K built-in keyboard initialized.");
     }
 #endif
 
     if (res = cli_init()) {
-        log_num(LOG_ERROR, "FAILED: CLI initialization", res);
+        log_num(LOG_ERROR, ":[INIT]FAILED: CLI initialization", res);
     } else {
-        log(LOG_INFO, "CLI initialized.");
+        log(LOG_INFO, ":[INIT]CLI initialized.");
     }
 
-    if (res = fsys_init()) {
-        log_num(LOG_ERROR, "FAILED: file system initialization", res);
-    } else {
-        log(LOG_INFO, "File system initialized.");
-    }
+    // if (res = fsys_init()) {
+    //     log_num(LOG_ERROR, ":[INIT]FAILED: file system initialization", res);
+    // } else {
+    //     log(LOG_INFO, ":[INIT]File system initialized.");
+    // }
 
     /* Wait until the target duration has been reached _or_ the user presses a key */
-    while (target_jiffies > sys_time_jiffies()) {
-        short scan_code = sys_kbd_scancode();
-        if (scan_code != 0) {
-            break;
-        }
-    }
+    // while (target_jiffies > sys_time_jiffies()) {
+    //     short scan_code = sys_kbd_scancode();
+    //     if (scan_code != 0) {
+    //         break;
+    //     }
+    // }
 
     /* Go back to text mode */
     text_init();
@@ -347,7 +348,7 @@ int main(int argc, char * argv[]) {
 
     cli_repl(0);
 
-    log(LOG_INFO, "Stopping.");
+    log(LOG_INFO, ":[INIT]Stopping.");
 
     /* Infinite loop... */
     while (1) {};
