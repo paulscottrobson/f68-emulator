@@ -65,8 +65,8 @@ void GFXStart(int autoStart) {
 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) 	// Exit if ESC pressed.
 																			isRunning = 0;
 			if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {				// Handle other keys.
-				_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 				HWScanCodeHandler(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
+				_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			}
 		}
 		SDL_FillRect(mainSurface, NULL, 											// Draw the background.

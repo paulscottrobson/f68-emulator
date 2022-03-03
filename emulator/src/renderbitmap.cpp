@@ -62,58 +62,12 @@ void HWRenderBitmap(BYTE8 *vicky,BYTE8 *videoMem,SDL_Rect *rDraw) {
 		for (int x = 0;x < pWidth;x++) {
 			int col = *pixData++;
 				if (col != 0) {
-				if (convLuts[col] < 0) {
-					convLuts[col] = HWConvertVickyBitmapLUT(vicky+0x2000+baseLut+col*4);
-				}
-				GFXRectangle(&rc,convLuts[col]);
-				rc.x += rc.w;
+					if (convLuts[col] < 0) {
+						convLuts[col] = HWConvertVickyBitmapLUT(vicky+0x2000+baseLut+col*4);
+					}
+					GFXRectangle(&rc,convLuts[col]);
 			}
+			rc.x += rc.w;
 		}
 	}
-	// int xCursor = -1,yCursor = -1;
-	// int colours[32];
-
-
-	// renderCount++; 										// Convert Vicky ARGB format to our 12 bit format
-	// for (int i = 0;i < 32;i++) {
-	// 	colours[i] = HWConvertVickyLUT(lutMem+i*4);
-	// }
-
-	// if (vicky[0x13] & 1) { 								// Cursor on.
-	// 	yCursor = (vicky[0x14] << 8) + vicky[0x15]; 	// Get location
-	// 	xCursor = (vicky[0x16] << 8) + vicky[0x17];
-	// }
-
-
-	// SDL_Rect rc,rcp;
-	// rc.x = xOrg;rc.y = yOrg; 							// Erase the screen background space to black default
-	// rc.w = cWidth * 8 * cSize;rc.h = cHeight * 8 * cSize;
-	// GFXRectangle(&rc,0x000);
-
-	// for (int x = 0;x < cWidth;x++) {
-	// 	for (int y = 0;y < cHeight;y++) {
-	// 		rc.x = xOrg+x*8*cSize;
-	// 		rc.y = yOrg+y*8*cSize;
-	// 		rc.w = rc.h = cSize;
-	// 		int offset = x+y*cBWidth;
-	// 		int ch = charMem[offset];
-	// 		int col = colMem[offset];
-	// 		if (x == xCursor && y == yCursor & (renderCount & 4) == 0) {
-	// 			col = vicky[0x10];
-	// 			ch = vicky[0x11];
-	// 		}
-	// 		int fgr = colours[col >> 4];
-	// 		int bgr = colours[(col & 0x0F)+16];
-	// 		for (int yc = 0;yc < 8;yc++) {
-	// 			int bitLine = fontMem[ch * 8 + yc];
-	// 			rcp = rc;
-	// 			rc.y += cSize;
-	// 			for (int xc = 0;xc < 8;xc++) {					
-	// 				GFXRectangle(&rcp,bitLine & 0x80 ? fgr:bgr);
-	// 				rcp.x += cSize;
-	// 				bitLine <<= 1;
-	// 			}
-	// 		}
-	// 	}
-	// }
 }

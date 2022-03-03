@@ -33,6 +33,7 @@ void HWSync(void) {
 
 void  HWScanCodeHandler(int scancode,int keydown) {
 	//printf("%d %d\n",scancode,keydown);
+	if (keydown == 0) return;
 	int n = 0;
 	while (mau_table[n] != -1 && mau_table[n] != scancode) {
 		n++;

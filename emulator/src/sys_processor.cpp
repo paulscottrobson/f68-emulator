@@ -118,11 +118,15 @@ void CPUWriteMemory(LONG32 address,BYTE8 data) {
 // *******************************************************************************************************************************
 
 BYTE8 CPUExecute(LONG32 breakPoint1,LONG32 breakPoint2) { 
-	BYTE8 next;
+	BYTE8 next,hitBreak;
+	hitBreak = 0;
 	do {
 		BYTE8 r = CPUExecuteInstruction();											// Execute an instruction
 		if (r != 0) return r; 														// Frame out.
-	} while (PC != breakPoint1 && PC != breakPoint2);								// Stop on breakpoint or $76 HALT break
+		if (m68k_read_memory_8(PC) == 0x10) { 										// $1000 is MOVE.B D0,D0
+			if (m68k_read_memory_8(PC+1) == 0x00) hitBreak = 1;
+		}
+	} while (PC != breakPoint1 && PC != breakPoint2 && hitBreak == 0);				// Stop on breakpoint or MOVE.B D0,D0
 	return 0; 
 }
 
