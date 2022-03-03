@@ -89,7 +89,7 @@ int CPUExecuteInstruction(void) {
 	#ifdef INCLUDE_DEBUGGING_SUPPORT
 	if (PC == 0xFFFFFFFF) CPUExit();
 	#endif
-	cycles -= m68k_execute(-99);
+	cycles -= m68k_execute(0);
 	if (cycles >= 0 ) return 0;														// Not completed a frame.
 	cycles = cycles + CYCLES_PER_FRAME;												// Adjust this frame rate, up to x16 on HS
 	HWSync();																		// Update any hardware
