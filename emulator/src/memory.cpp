@@ -64,7 +64,7 @@ void MEMRenderDisplay(void) {
 	rc.w = WIN_WIDTH;rc.h = WIN_HEIGHT;
 	rc.x = WIN_WIDTH/2 - rc.w/2;rc.y = WIN_HEIGHT/2-rc.h/2;
 	 													
-	if (GFXIsKeyPressed(GFXKEY_CONTROL)) {
+	if (GFXGetDisplayToggle() & 1) {
 		HWRenderTextScreen('A',hwMemory+0x40000,hwMemory+0x60000,hwMemory+0x68000,
 															hwMemory+0x6C400,hwMemory+0x48000,&rc);	
 	} else {

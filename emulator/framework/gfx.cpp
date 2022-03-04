@@ -14,6 +14,7 @@
 static SDL_Window *mainWindow = NULL;
 static SDL_Surface *mainSurface = NULL;
 static int background;
+static int displaySelectCount = 0;
 
 #define RED(x) ((((x) >> 8) & 0xF) * 17)
 #define GREEN(x) ((((x) >> 4) & 0xF) * 17)
@@ -65,6 +66,11 @@ void GFXStart(int autoStart) {
 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) 	// Exit if ESC pressed.
 																			isRunning = 0;
 			if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {				// Handle other keys.
+				if (event.type == SDL_KEYDOWN) { 	
+					if (event.key.keysym.sym == SDLK_F3) {							// F3 toggles display.
+						displaySelectCount++;
+					}
+				}				
 				HWScanCodeHandler(event.key.keysym.scancode,event.type == SDL_KEYDOWN);
 				_GFXUpdateKeyRecord(event.key.keysym.sym,event.type == SDL_KEYDOWN);
 			}
@@ -404,3 +410,12 @@ void audio_callback(void *_beeper, Uint8 *_stream, int _length)
 void GFXSetFrequency(int freq) {
 	beeper.setFrequency(freq);
 }
+
+// *******************************************************************************************************************************
+//											Get Debug Display Counter
+// *******************************************************************************************************************************
+
+int GFXGetDisplayToggle(void) {
+	return displaySelectCount;
+}
+

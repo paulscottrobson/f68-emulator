@@ -14,6 +14,7 @@
 
 void DBGVerticalLabel(int x,int y,const char *labels[],int fgr,int bgr);
 void DBGDefineKey(int keyID,int gfxKey);
+int DBGGetDisplayToggle(void);
 
 #include "sys_debug_system.h"
 

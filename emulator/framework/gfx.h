@@ -40,6 +40,7 @@ int  GFXToASCII(int ch,int applyModifiers);
 int  GFXTimer(void);
 void GFXSetCharacterSize(int xSize,int ySize);
 void GFXDefineCharacter(int nChar,int b1,int b2,int b3,int b4,int b5);
+int GFXGetDisplayToggle(void);
 void GFXCloseOnDebug(void);
 
 void GFXXRender(SDL_Surface *surface,int autoStart);

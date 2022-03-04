@@ -43,11 +43,14 @@ ESC 			Quit
 
 F1 				Reset/Run program.
 F2 				Set viewed code to PC.
+F3              Toggle output.
 F5 				Start emulation.
 F6 				Stop
 F7 				Single Step
 F8 				Step over JSR/BSR/Trap
 F9 				Set Breakpoint
+
+The instruction move.b d0,d0 in machine code will cause the program to break to the debugger.
 
 *** NOTE ***
 
