@@ -32,12 +32,12 @@ void HWSync(void) {
 #include <scan_lookup.h>
 
 void  HWScanCodeHandler(int scancode,int keydown) {
-	//printf("%d %d\n",scancode,keydown);
+
 	if (keydown == 0) return;
 	
-	if (scancode == SDLK_F1 || scancode == SDLK_F2 || scancode == SDLK_F3 || scancode == SDLK_F4 ||
-		scancode == SDLK_F5 || scancode == SDLK_F6 || scancode == SDLK_F7 || scancode == SDLK_F8 ||
-		scancode == SDLK_F9 || scancode == SDLK_F10) return;
+	if (scancode == SDL_SCANCODE_F1 || scancode == SDL_SCANCODE_F2 || scancode == SDL_SCANCODE_F3 || scancode == SDL_SCANCODE_F4 ||
+		scancode == SDL_SCANCODE_F5 || scancode == SDL_SCANCODE_F6 || scancode == SDL_SCANCODE_F7 || scancode == SDL_SCANCODE_F8 ||
+		scancode == SDL_SCANCODE_F9 || scancode == SDL_SCANCODE_F10) return;
 
 	int n = 0;
 	while (mau_table[n] != -1 && mau_table[n] != scancode) {
