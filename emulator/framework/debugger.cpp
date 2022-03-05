@@ -68,7 +68,6 @@ void GFXXRender(SDL_Surface *surface,int autoStart) {
 			#define CMDKEY(n) GFXIsKeyPressed(keyMapping[n])						// Support Macro.
 
 			if (CMDKEY(DBGKEY_RESET)) {												// Reset processor (F1)
-				GAVINClearKeyboardQueue();
 				DEBUG_RESET();					
 				addressSettings[0] = DEBUG_HOMEPC();
 				GFXSetFrequency(0);
@@ -89,17 +88,14 @@ void GFXXRender(SDL_Surface *surface,int autoStart) {
 					addressSettings[0] = DEBUG_HOMEPC();
 				}
 				if (CMDKEY(DBGKEY_RUN)) {											// Run program (F5)
-					GAVINClearKeyboardQueue();
 					inRunMode = 1;											
 					stepBreakPoint = -2;
 				}
 				if (CMDKEY(DBGKEY_STEP)) {											// Execute a single instruction (F7)
-					GAVINClearKeyboardQueue();
 					DEBUG_SINGLESTEP();
 					addressSettings[0] = DEBUG_HOMEPC();
 				}
 				if (CMDKEY(DBGKEY_STEPOVER)) {										// Step over program calls (F8)
-					GAVINClearKeyboardQueue();
 					stepBreakPoint = DEBUG_GETOVERBREAK();							// Where if anywhere should we break ?
 					if (stepBreakPoint == 0) {										// No step over, just single step.
 						DEBUG_SINGLESTEP();
@@ -152,3 +148,10 @@ void DBGVerticalLabel(int x,int y,const char *labels[],int fgr,int bgr) {
 	}
 }
 
+// *******************************************************************************************************************************
+//												  Get if running or not.
+// *******************************************************************************************************************************
+
+int DBGGetRunMode(void) {
+	return inRunMode;
+}

@@ -139,7 +139,7 @@ LONG32 CPUGetStepOverBreakpoint(void) {
 	int pc = CPUGetStatus()->pc; 
 	int c = m68k_disassemble(buffer, pc, PROCESSOR_TYPE);
 	buffer[3] = '\0';
-	if (strcmp(buffer,"bsr") == 0 || strcmp(buffer,"jsr") == 0 || strcmp(buffer,"trap") == 0) {
+	if (strcmp(buffer,"bsr") == 0 || strcmp(buffer,"jsr") == 0 || strcmp(buffer,"tra") == 0) {
 		return pc+c;
 	}
 	return 0;																		// Do a normal single step
