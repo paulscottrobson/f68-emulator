@@ -50,13 +50,13 @@ void HWRenderTextScreen(char vType,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYT
 	if (vType == 'A') {									// Vicky III A
 		pWidth = 800;
 		pHeight = 600;
-		if (vicky[2] & 0x01) { 				
+		if (vicky[2] & 0x08) { 				
 			pWidth = 1024;pHeight = 768;
 		}
 	} else { 											// Vicky III B
 		pWidth = 640;
 		pHeight = 480;
-		if (vicky[2] & 8) { 
+		if (vicky[2] & 0x01) { 
 			pWidth = 800;pHeight = 600; 
 		}
 	}		

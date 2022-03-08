@@ -74,3 +74,7 @@ The emulator has its own seperate logger, which operates by writing an ASCII str
 e.g. the following code will print Hello, world and the current PC value. 
 
     *((long *)-4) = (long)"Hello, world";
+
+Notes
+=====
+Contrary to the documentation, but as confirmed by Stefany, bit 11 of Vicky 3 B's MCR controls the resolution (0=640x480,1=800x600)
