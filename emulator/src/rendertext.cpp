@@ -62,8 +62,8 @@ void HWRenderTextScreen(char vType,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYT
 	}		
 	int cBWidth = pWidth/8; 							// Byte lines per width pre border
 
-	pWidth = pWidth - (vicky[5] & 0x3F)*2;				// Adjust for border.
-	pHeight = pHeight - (vicky[6] & 0x3F)*2;
+	pWidth = pWidth - (vicky[6] & 0x3F)*2;				// Adjust for border.
+	pHeight = pHeight - (vicky[5] & 0x3F)*2;
 
 	int scaleX = rDraw->w/pWidth;
 	int scaleY = rDraw->h/pHeight;

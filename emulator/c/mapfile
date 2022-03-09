@@ -5,7 +5,7 @@ Files:
   /home/paulr/Projects/f68-emulator/documents/..//vbcc/targets/a2560-elf/lib/libvc.a (_main.o):  CODE 20050(be), DATA 20910(4), BSS 20954(4) hex
   syscalls.o:  CODE 20110(650) hex
   io.o:  CODE 20760(17a), DATA 20914(40) hex
-  filecb8HfI.o:  CODE 208dc(24) hex
+  fileGzwl81.o:  CODE 208dc(24) hex
   INITEXIT:  .dtors 20900(8), .ctors 20908(8) hex
 
 
@@ -16,7 +16,7 @@ Section mapping (numbers in hex):
            00020050 - 0002010e _main.o(CODE)
            00020110 - 00020760 syscalls.o(CODE)
            00020760 - 000208da io.o(CODE)
-           000208dc - 00020900 filecb8HfI.o(CODE)
+           000208dc - 00020900 fileGzwl81.o(CODE)
 ------------------------------
   00020900 .dtors  (size 8, allocated 0)
            00020900 - 00020908 INITEXIT(.dtors)
