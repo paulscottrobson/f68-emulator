@@ -8,5 +8,6 @@ Gone to build #3.
 
 Build 4 10/3/2022
 	
-	- Memory access logs are not triggered by -4 writes.
+	- Memory access logs are not triggered by -4 writes (memory.cpp)
+	- Added changes to C source files.
 	
