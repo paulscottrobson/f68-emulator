@@ -15,6 +15,7 @@ static BYTE8 ramMemory[SRAM_END];													// SRAM Memory at $000000
 static BYTE8 flashMemory[FLASH_SIZE];												// Flash memory at end of memory
 static BYTE8 videoMemory[VRAM_END-VRAM_START+1];									// Video RAM
 static BYTE8 hwMemory[HARDWARE_RAM]; 												// RAM space & Registers in hardware area
+static int   logBadAddress = 0; 													// Log address errors.
 
 // *******************************************************************************************************************************
 //													  Print logged text
@@ -28,6 +29,14 @@ static void logPrint(unsigned int textAddr) {
 	}
 	buffer[n] = '\0';
 	fprintf(stderr,"F68 LOG: %s PC:$%08x\n",buffer,CPUGetStatus()->pc);
+}
+
+// *******************************************************************************************************************************
+//													  Set bad address log
+// *******************************************************************************************************************************
+
+void MEMSetAddressLog(int logBad) {
+	logBadAddress = logBad;
 }
 
 // *******************************************************************************************************************************
@@ -101,6 +110,7 @@ unsigned int  m68k_read_memory_8(unsigned int address){
 		#include "generated/hardware/hw_vicky3b_read_byte.h"
 		return hwMemory[address-HARDWARE_START];
 	}
+	if (logBadAddress) printf("Warning: Reading address $%08x PC:$%08x\n",address,PC);
 	return 0x00;
 }
 
@@ -146,6 +156,7 @@ void m68k_write_memory_8(unsigned int address, unsigned int value){
 
 	if (address >= VRAM_START && address <= VRAM_END) {
 		videoMemory[address-VRAM_START] = value;
+		return;
 	}
 
 	if (ISHWADDR(address)) {
@@ -154,7 +165,9 @@ void m68k_write_memory_8(unsigned int address, unsigned int value){
 		#include "generated/hardware/hw_vicky3a_write_byte.h"
 		#include "generated/hardware/hw_vicky3b_write_byte.h"
 		hwMemory[address-HARDWARE_START] = value;
+		return;
 	}
+	if (logBadAddress) printf("Warning: Writing address $%08x PC:$%08x\n",address,PC);
 }
 
 void m68k_write_memory_16(unsigned int address, unsigned int value){

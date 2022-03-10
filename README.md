@@ -1,7 +1,7 @@
 # f68-emulator
 A2560K Emulator
 
-Note this is *still* in alpha, though it's not far off going into Beta.
+Decided to promote it to early Beta, changes now logged properly.
 
 Building it
 ===========

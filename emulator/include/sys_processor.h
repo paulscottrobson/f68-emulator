@@ -23,7 +23,7 @@ void CPUWriteMemory(LONG32 address,BYTE8 data);
 void CPUOverrideReset(int addr);
 
 void MEMLoadFlashROM(void);
-
+void MEMSetAddressLog(int logBad);
 
 #define PC 			(CPUGetStatus()->pc)
 

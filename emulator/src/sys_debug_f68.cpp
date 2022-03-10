@@ -34,6 +34,8 @@ void DBGXRender(int *address,int showDisplay) {
 	const char *sr = "XNZVC";
 	CPUSTATUS *s = CPUGetStatus();
 
+	MEMSetAddressLog(0);																// Address log off.
+
 	if (showDisplay == 0) {
 		GFXSetCharacterSize(DW_WIDTH,DW_HEIGHT);
 
@@ -93,4 +95,5 @@ void DBGXRender(int *address,int showDisplay) {
 	} else {
 		MEMRenderDisplay();
 	}
+	MEMSetAddressLog(1);																// Address log on.
 }	

@@ -43,6 +43,7 @@ void CPUReset(void) {
 		HWReset();																		// Reset Hardware
 		cycles = CYCLES_PER_FRAME;
 	}
+	MEMSetAddressLog(1);																// Address log on.
 }
 
 // *******************************************************************************************************************************

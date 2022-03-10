@@ -38,7 +38,7 @@ copymessage:
 				;
 
 				move.l 	#$00000801,($FEC80000)		; switch text mode.
-
+				
 done:           clr.l d0                            ; sys_exit
                 clr.l d1                            ; Return value = 0
                 trap #15

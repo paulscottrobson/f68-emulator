@@ -1,0 +1,8 @@
+Changes
+=======
+Gone to build #3.
+
+	- Added incremental build counter
+	- Decided in Beta
+	- Logs bad memory accesses on stdout.
+

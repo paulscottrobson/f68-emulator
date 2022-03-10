@@ -44,7 +44,7 @@ Source: "sample.asm"
                             	    39: 
 00:00010026 23FC00000801FEC8	    40: 				move.l 	#$00000801,($FEC80000)		; switch text mode.
 00:0001002E 0000
-                            	    41: 
+                            	    41: 				
 00:00010030 7000            	    42: done:           clr.l d0                            ; sys_exit
 00:00010032 7200            	    43:                 clr.l d1                            ; Return value = 0
 00:00010034 4E4F            	    44:                 trap #15

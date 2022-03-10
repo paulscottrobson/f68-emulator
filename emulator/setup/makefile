@@ -6,3 +6,6 @@ endif
 
 all:
 	python setup.py
+ifeq ($(OS),Windows_NT)
+	python buildcount.py
+endif

@@ -10,10 +10,11 @@
 // *******************************************************************************************************************************
 
 #include <includes.h>
+#include <generated/buildnumber.h>
 
 int main(int argc,char *argv[]) {
 	char title[64];
-	sprintf(title,"%s (%s)",WIN_TITLE,BUILD_TIME);
+	sprintf(title,"%s (Build %d : %s)",WIN_TITLE,BUILD_COUNT,BUILD_TIME);
 	DEBUG_RESET();
 	int runNow = DEBUG_ARGUMENTS(argc,argv);
 	GFXOpenWindow(title,WIN_WIDTH,WIN_HEIGHT,WIN_BACKCOLOUR);
