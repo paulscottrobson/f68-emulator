@@ -6,3 +6,7 @@ Gone to build #3.
 	- Decided in Beta
 	- Logs bad memory accesses on stdout.
 
+Build 4 10/3/2022
+	
+	- Memory access logs are not triggered by -4 writes.
+	

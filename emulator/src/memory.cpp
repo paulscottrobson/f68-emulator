@@ -190,6 +190,7 @@ void m68k_write_memory_32(unsigned int address, unsigned int value){
 
 	if (address == 0xFFFFFFFC) {
 		logPrint(value);
+		return;
 	}
 
 	if (ISHWADDR(address)) {

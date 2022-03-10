@@ -2,3 +2,4 @@
 - Add Mouse (under consideration, position unclear)
 - Generalise, and add Second bitmap.
 - Timer enable.
+- Writes to Flash allowed.
