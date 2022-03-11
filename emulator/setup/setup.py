@@ -86,6 +86,9 @@ class BasicConfiguration(object):
 		h.write("#define FLASH_ADDRESS (0x{0})\n".format(self.setup["FLASH_ADDRESS"]))
 		h.write("#define FLASH_SIZE (0x{0})\n\n".format(self.setup["FLASH_SIZE"]))
 		h.write("#define SRAM_END (0x{0})\n\n".format(self.setup["SRAM_SIZE"]))
+		h.write("#define SDRAM_ADDRESS (0x{0})\n\n".format(self.setup["SDRAM_ADDRESS"]))
+		if self.setup["SDRAM_ADDRESS"] != 0:
+			h.write("#define SDRAM_ENABLED\n\n")
 
 
 		assert self.setup["FLASH_ROM"] is not None,"No ROM defined"

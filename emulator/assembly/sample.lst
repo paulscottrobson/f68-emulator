@@ -1,5 +1,5 @@
 Sections:
-00: "seg10000" (10000-10046)
+00: "seg10000" (10000-1004E)
 
 
 Source: "sample.asm"
@@ -25,7 +25,7 @@ Source: "sample.asm"
                             	    20: 				;
 00:00010000 7013            	    21: 				move.l #$13,d0                      ; sys_chan_write command #
 00:00010002 7200            	    22:                 clr.l d1                            ; Channel #0 (the display)
-00:00010004 243C00010038    	    23:                 move.l #greet,d2                    ; Pointer to message
+00:00010004 243C00010040    	    23:                 move.l #greet,d2                    ; Pointer to message
 00:0001000A 760E            	    24:                 move.l #greet_end-greet+1,d3        ; Length of message
 00:0001000C 4E4F            	    25:                 trap #15 							; handles system functions
                             	    26:                 ;
@@ -34,7 +34,7 @@ Source: "sample.asm"
                             	    29:                 ;
 00:0001000E 41F9FECA0000    	    30:                 lea.l 	$FECA0000,a0 				; screen text memory here
 00:00010014 303C0020        	    31:                 move.w 	#32,d0 						; do it 32 times.
-00:00010018 43FA001E        	    32: repeatmessage:  lea.l 	greet,a1 					; message here
+00:00010018 43FA0026        	    32: repeatmessage:  lea.l 	greet,a1 					; message here
                             	    33: copymessage:
 00:0001001C 10D9            	    34: 				move.b 	(a1)+,(a0)+ 				; copy byte over.
 00:0001001E 4A51            	    35: 				tst 	(a1) 						; is it zero.
@@ -47,23 +47,24 @@ Source: "sample.asm"
 00:00010026 41F9FEC80000    	    42: 				lea 	vicky3,a0 					; start register writes
 00:0001002C 20BC0000000F    	    43: 				move.l 	#$0000000F,(a0) 			; graphics mode & bitmap on, text overlay on.
                             	    44: 
-                            	    45: 				
-00:00010032 7000            	    46: done:           clr.l d0                            ; sys_exit
-00:00010034 7200            	    47:                 clr.l d1                            ; Return value = 0
-00:00010036 4E4F            	    48:                 trap #15
-                            	    49: 
-00:00010038 48656C6C6F2C2077	    50: greet:          dc.b "Hello, world!"
-00:00010040 6F726C6421
-00:00010045 00              	    51: greet_end:      dc.b 0
-                            	    52: 
+00:00010032 21FC00000004FFF8	    45: 				move.l 	#4,$FFFFFFF8
+                            	    46: 				
+00:0001003A 7000            	    47: done:           clr.l d0                            ; sys_exit
+00:0001003C 7200            	    48:                 clr.l d1                            ; Return value = 0
+00:0001003E 4E4F            	    49:                 trap #15
+                            	    50: 
+00:00010040 48656C6C6F2C2077	    51: greet:          dc.b "Hello, world!"
+00:00010048 6F726C6421
+00:0001004D 00              	    52: greet_end:      dc.b 0
                             	    53: 
+                            	    54: 
 
 
 Symbols by name:
 copymessage                      A:0001001C
-done                             A:00010032
-greet                            A:00010038
-greet_end                        A:00010045
+done                             A:0001003A
+greet                            A:00010040
+greet_end                        A:0001004D
 repeatmessage                    A:00010018
 start                            A:00010000
 vicky3                           E:FEC80000
@@ -73,6 +74,6 @@ FEC80000 vicky3
 00010000 start
 00010018 repeatmessage
 0001001C copymessage
-00010032 done
-00010038 greet
-00010045 greet_end
+0001003A done
+00010040 greet
+0001004D greet_end

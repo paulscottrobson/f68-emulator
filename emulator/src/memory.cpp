@@ -17,6 +17,10 @@ static BYTE8 videoMemory[VRAM_END-VRAM_START+1];									// Video RAM
 static BYTE8 hwMemory[HARDWARE_RAM]; 												// RAM space & Registers in hardware area
 static int   logBadAddress = 0; 													// Log address errors.
 
+#ifdef SDRAM_ENABLED
+static BYTE8 sdMemory[64*1024*1024];												// 64 Mb SDRAM.
+#endif
+
 // *******************************************************************************************************************************
 //													  Print logged text
 // *******************************************************************************************************************************
@@ -106,6 +110,12 @@ unsigned int  m68k_read_memory_8(unsigned int address){
 		return videoMemory[address-VRAM_START];
 	}
 
+	#ifdef SDRAM_ENABLED
+	if (address >= SDRAM_ADDRESS && address < SDRAM_ADDRESS+0x4000000) {
+		return sdMemory[address-SDRAM_ADDRESS];
+	}
+	#endif
+
 	if (ISHWADDR(address)) {
 		#include "generated/hardware/hw_gavin_read_byte.h"
 		#include "generated/hardware/hw_beatrix_read_byte.h"
@@ -165,6 +175,13 @@ void m68k_write_memory_8(unsigned int address, unsigned int value){
 	if (address >= FLASH_ADDRESS) {
 		return;
 	}
+
+	#ifdef SDRAM_ENABLED
+	if (address >= SDRAM_ADDRESS && address < SDRAM_ADDRESS+0x4000000) {
+		sdMemory[address-SDRAM_ADDRESS] = value;
+		return;
+	}
+	#endif
 
 	if (ISHWADDR(address)) {
 		#include "generated/hardware/hw_gavin_write_byte.h"
@@ -243,6 +260,7 @@ unsigned int m68k_read_disassembler_32 (unsigned int address){
 //		---- 			-------
 // 		10-03-2022  	Printing by write logging to $FFFFFFFFC (-4) does not trigger warnings.
 //		11-03-2022 		Can write to flash, which does nothing, but doesn't warn.
+//						Added 64Mb of SDRAM support.
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

@@ -1,7 +1,7 @@
 //
 //	Automatically generated.
 //
-#define BUILD_TIME ("Fri 11-Mar-2022 13:48")
+#define BUILD_TIME ("Fri 11-Mar-2022 14:42")
 
 #define ADDRESS_MASK (0xFFFFFFFF)
 
@@ -16,6 +16,10 @@
 #define FLASH_SIZE (0x400000)
 
 #define SRAM_END (0x400000)
+
+#define SDRAM_ADDRESS (0x02000000)
+
+#define SDRAM_ENABLED
 
 #define FLASH_ROM ("a2560k.rom")
 

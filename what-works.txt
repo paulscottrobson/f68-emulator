@@ -7,12 +7,13 @@ Hardware
 The bottom 4Mb of SRAM
 Flash memory at the top of memory
 VRAM Memory
+SDRAM Memory
 
 Gavin
 =====
 Reading from the Mau Keyboard Queue
 Reading the RTC (but it is not writeable, it always shows current time)
-The five timers and their enable bits
+The five timers and their enable bits, resolution is only one frame.
 Interrupt handling but only the MAU Keyboard and SOF interrupt actually fire.
 The PS/2 only is sufficiently implemented to convince the MCP there is no keyboard
 
@@ -33,3 +34,4 @@ Character and Colour array only at start of RAM areas (can these move ?)
 Graphics
 --------
 Bitmap 0 and associated LUT.
+Text overlay when text background colour is zero.
