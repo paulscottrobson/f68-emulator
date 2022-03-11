@@ -13,7 +13,7 @@
 
 static BYTE8 icr[6];
 static BYTE8 mauQueue = 0;
-static LONG32 timers[4];
+static LONG32 timers[5];
 
 // *******************************************************************************************************************************
 //
@@ -132,10 +132,14 @@ void GAVIN_InsertMauFIFO(int mau) {
 // *******************************************************************************************************************************
 
 void GAVIN_UpdateTimers(int cycles,int frames) {
-	timers[0] += cycles;
-	timers[1] += cycles;
-	timers[2] += frames;
-	timers[3] += frames;
+	LONG32 ctrl0 = m68k_read_memory_32(ADDR_GAVIN+0x200);			// Read control registers
+	LONG32 ctrl1 = m68k_read_memory_32(ADDR_GAVIN+0x204);
+
+	if (ctrl0 & 0x000001) timers[0] += cycles;
+	if (ctrl0 & 0x000100) timers[1] += cycles;
+	if (ctrl0 & 0x010001) timers[2] += cycles;
+	if (ctrl1 & 0x000001) timers[3] += frames;
+	if (ctrl1 & 0x000100) timers[4] += frames;
 }
 
 // *******************************************************************************************************************************
@@ -169,6 +173,7 @@ int GAVIN_IdentifyInterrupt(int irq) {
 //	
 //		Date 			Changes
 //		---- 			-------
+//		11-Mar-22 		Added timer 4 and enable bits.
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

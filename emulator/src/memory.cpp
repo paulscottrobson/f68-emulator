@@ -70,16 +70,19 @@ void MEMEndRun(void) {
 
 void MEMRenderDisplay(void) {
 	SDL_Rect rc; 
+	DISPLAYINFO di;
 	rc.w = WIN_WIDTH;rc.h = WIN_HEIGHT;
 	rc.x = WIN_WIDTH/2 - rc.w/2;rc.y = WIN_HEIGHT/2-rc.h/2;
 	 													
 	if (GFXGetDisplayToggle() & 1) {
-		HWRenderTextScreen('A',hwMemory+0x40000,hwMemory+0x60000,hwMemory+0x68000,
-															hwMemory+0x6C400,hwMemory+0x48000,&rc);	
+		HWGetDisplayInfo(&di,'A',hwMemory+0x40000,&rc);
+		HWRenderTextScreen(&di,hwMemory+0x40000,hwMemory+0x60000,hwMemory+0x68000,
+															hwMemory+0x6C400,hwMemory+0x48000);	
 	} else {
-		HWRenderTextScreen('B',hwMemory+0x80000,hwMemory+0xA0000,hwMemory+0xA8000,
-															hwMemory+0xAC400,hwMemory+0x88000,&rc);
-		HWRenderBitmap(hwMemory+0x80000,videoMemory,&rc);
+		HWGetDisplayInfo(&di,'B',hwMemory+0x80000,&rc);
+		HWRenderBitmap(&di,hwMemory+0x80000,videoMemory);
+		HWRenderTextScreen(&di,hwMemory+0x80000,hwMemory+0xA0000,hwMemory+0xA8000,
+															hwMemory+0xAC400,hwMemory+0x88000);
 	}
 }
 
@@ -159,6 +162,10 @@ void m68k_write_memory_8(unsigned int address, unsigned int value){
 		return;
 	}
 
+	if (address >= FLASH_ADDRESS) {
+		return;
+	}
+
 	if (ISHWADDR(address)) {
 		#include "generated/hardware/hw_gavin_write_byte.h"
 		#include "generated/hardware/hw_beatrix_write_byte.h"
@@ -235,6 +242,7 @@ unsigned int m68k_read_disassembler_32 (unsigned int address){
 //		Date 			Changes
 //		---- 			-------
 // 		10-03-2022  	Printing by write logging to $FFFFFFFFC (-4) does not trigger warnings.
+//		11-03-2022 		Can write to flash, which does nothing, but doesn't warn.
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

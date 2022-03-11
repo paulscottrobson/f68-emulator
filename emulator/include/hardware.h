@@ -22,6 +22,15 @@
 void HWReset(void);
 void HWSync(void);
 
+typedef struct _DisplayInfo
+{
+	SDL_Rect rcFull;						// Whole draw area
+	SDL_Rect rcDraw; 						// The draw space for the current display
+	int pSize;								// The pixel scale 
+	int dWidth,dHeight; 					// Display width and height.	
+	char vType; 							// Vicky A or B
+} DISPLAYINFO;
+
 int Gavin_Read(int offset,BYTE8 *memory,int size);
 int Gavin_Write(int offset,BYTE8 *memory,int value,int size);
 
@@ -32,8 +41,11 @@ int GAVIN_IdentifyInterrupt(int irq);
 void GAVINClearKeyboardQueue(void);
 
 void MEMRenderDisplay(void);
-void HWRenderTextScreen(char vType,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYTE8 *lutMem,BYTE8 *fontMem,SDL_Rect *rDraw);
-void HWRenderBitmap(BYTE8 *vicky,BYTE8 *videoMem,SDL_Rect *rDraw);
+
+void HWGetDisplayInfo(DISPLAYINFO *d,char vType,BYTE8 *vicky,SDL_Rect *rDrawArea);
+void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYTE8 *lutMem,BYTE8 *fontMem);
+void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem);
+
 int HWConvertVickyTextLUT(BYTE8 *lut);
 int HWConvertVickyBitmapLUT(BYTE8 *lut);
 

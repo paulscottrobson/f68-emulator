@@ -23,43 +23,25 @@ LONG32 HWReadLong(BYTE8 *p) {
 //													Render text screen
 // *******************************************************************************************************************************
 
-void HWRenderBitmap(BYTE8 *vicky,BYTE8 *videoMem,SDL_Rect *rDraw) {
-	int pWidth = 640;
-	int pHeight = 480;
+void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem) {
 
 	if ((vicky[3] & 0x08) == 0) return; 				// No bitmap mode enabled.
 	if ((vicky[0x103] & 0x01) == 0) return; 			// Layer not enabled.
 
-	if ((vicky[2] & 0x03) == 1) { 						// Handle larger size
-		pWidth = 800;
-		pHeight = 600;
-	}
 
 	int convLuts[256]; 									// Convert LUTs when needed.
 	for (int i = 0;i < 256;i++) convLuts[i] = -1;
 
-	int scaleX = rDraw->w/pWidth;
-	int scaleY = rDraw->h/pHeight;
-
-	int cSize = (scaleX < scaleY) ? scaleX : scaleY;	// Char Size in pixels.
-
-	int xOrg = rDraw->x+rDraw->w/2-pWidth*cSize/2;		// Work out character origin.
-	int yOrg = rDraw->y+rDraw->h/2-pHeight*cSize/2;
-
-	int backCol = HWConvertVickyTextLUT(vicky+12);		// Convert BGR background colour
-	GFXRectangle(rDraw,backCol); 						// Draw background
-
 	SDL_Rect rc;
 
 	BYTE8 *pixData = videoMem;
-
 	pixData += HWReadLong(vicky+0x104); 				// Start of bitmap data.
 
 	int baseLut = ((vicky[0x103] >> 1) & 7) * 0x400;	// Which LUT set ?
 
-	for (int y = 0;y < pHeight;y++) {
-		rc.x = xOrg;rc.y = yOrg+y*cSize;rc.w = rc.h = cSize;
-		for (int x = 0;x < pWidth;x++) {
+	for (int y = 0;y < d->dHeight;y++) {
+		rc.x = d->rcDraw.x;rc.y = d->rcDraw.y+y*d->pSize;rc.w = rc.h = d->pSize;
+		for (int x = 0;x < d->dWidth;x++) {
 			int col = *pixData++;
 				if (col != 0) {
 					if (convLuts[col] < 0) {
@@ -79,6 +61,7 @@ void HWRenderBitmap(BYTE8 *vicky,BYTE8 *videoMem,SDL_Rect *rDraw) {
 //	
 //		Date 			Changes
 //		---- 			-------
+//		11-Mar-22 		Code reorganisation to allow overlay
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

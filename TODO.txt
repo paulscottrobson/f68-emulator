@@ -1,5 +1,11 @@
-- Video Mode flag issues (under consideration)
+Test
+====
+- Timer Control works
+- Flash Write okay
+- Overlay works okay.
+
 - Add Mouse (under consideration, position unclear)
+- Add Sprites
 - Generalise, and add Second bitmap.
-- Timer enable.
-- Writes to Flash allowed.
+- Add tiles
+- Add SDRAM Memory.

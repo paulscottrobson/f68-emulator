@@ -12,6 +12,8 @@
 
 				org 	$10000
 
+vicky3 = $FEC80000
+
 start:          									; start tells us where to run from, because of -exec=start in the command line.
 				;
 				; 		Write Hello world using the O/S
@@ -37,7 +39,9 @@ copymessage:
 				; 		Exit the program.
 				;
 
-				move.l 	#$00000801,($FEC80000)		; switch text mode.
+				lea 	vicky3,a0 					; start register writes
+				move.l 	#$0000000F,(a0) 			; graphics mode & bitmap on, text overlay on.
+
 				
 done:           clr.l d0                            ; sys_exit
                 clr.l d1                            ; Return value = 0

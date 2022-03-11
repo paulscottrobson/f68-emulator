@@ -1,0 +1,35 @@
+Implemented
+===========
+
+Hardware
+========
+68040 CPU + Interrupt redirection.
+The bottom 4Mb of SRAM
+Flash memory at the top of memory
+VRAM Memory
+
+Gavin
+=====
+Reading from the Mau Keyboard Queue
+Reading the RTC (but it is not writeable, it always shows current time)
+The five timers and their enable bits
+Interrupt handling but only the MAU Keyboard and SOF interrupt actually fire.
+The PS/2 only is sufficiently implemented to convince the MCP there is no keyboard
+
+Vicky 3
+=======
+Seperate displays for 3A/3B F3 toggles between them.
+Vicky3A : 800x600 or 1024x768 resolution
+Vicky3B : 640x480 or 800x600 resolution (640x400 is not supported)
+
+Text
+----
+Background Colour
+Text LUT selection
+Cursor position colour and character
+Character and Colour array only at start of RAM areas (can these move ?)
+8x8 Fonts only.
+
+Graphics
+--------
+Bitmap 0 and associated LUT.
