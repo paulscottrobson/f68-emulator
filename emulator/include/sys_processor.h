@@ -33,8 +33,6 @@ BYTE8 CPUExecute(LONG32 breakPoint1,LONG32 breakPoint2);
 LONG32 CPUGetStepOverBreakpoint(void);
 void CPUExit(void);
 
-int SRECHandler(int argc,char *argv[]);
-
 void MEMEndRun(void);
 void MEMLoadBinary(char *fileName);
 

@@ -10,7 +10,7 @@
 // *******************************************************************************************************************************
 
 #include <includes.h>
-#include <generated/buildnumber.h>
+#include <buildnumber.h>
 
 int main(int argc,char *argv[]) {
 	char title[64];

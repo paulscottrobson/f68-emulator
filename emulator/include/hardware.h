@@ -51,6 +51,12 @@ int HWConvertVickyBitmapLUT(BYTE8 *lut);
 
 void  HWScanCodeHandler(int scancode,int keydown);
 
+int SRECHandler(int argc,char *argv[]);
+void FFMTLoad(char *fileName,int format);
+
+#define FFMT_PGX 		(0)
+#define FFMT_PGZ 	 	(1)
+
 #ifdef LINUX
 #define FILESEP '/'
 #else

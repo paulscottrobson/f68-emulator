@@ -103,28 +103,60 @@ static void _SRECProcessMotorola(char *line) {
 
 // *******************************************************************************************************************************
 //
+// 												Handle SREC file
+//
+// *******************************************************************************************************************************
+
+static void _SRECAttemptLoad(char *fileName) {
+	char buffer[128];
+	upper16bits = 0;
+	FILE *f = fopen(fileName,"r");
+	if (f == NULL)
+		exit(fprintf(stderr,"Cannot find file %s\n",fileName));
+	while (!feof(f)) {
+		fgets(buffer,sizeof(buffer),f);
+		//printf("[%s]\n",buffer);
+		if (buffer[0] == 'S') _SRECProcessMotorola(buffer);
+		if (buffer[0] == ':') _SRECProcessIntel(buffer);
+	}
+	fclose(f);
+}			
+
+// *******************************************************************************************************************************
+//
 // 										Process Command Line. Return -1 to autorun
 //
 // *******************************************************************************************************************************
 
 int SRECHandler(int argc,char *argv[]) {
 	int autoRun = 0;
-	char buffer[128];
+	char fnType[8];
+
 	for (int i = 1;i < argc;i++) {
-		if (strcmp(argv[i],"go") == 0) {
+		int processed = 0;
+
+		fnType[0] = '\0';										// Get file name type
+		if (strlen(argv[i]) > 3) {
+			strcpy(fnType,argv[i]+strlen(argv[i])-4);
+		}
+
+		if (strcmp(argv[i],"go") == 0) {						// Go option to autorun
 			autoRun = -1;
-		} else {		
-			upper16bits = 0;
-			FILE *f = fopen(argv[i],"r");
-			if (f == NULL)
-				exit(fprintf(stderr,"Cannot find file %s\n",argv[i]));
-			while (!feof(f)) {
-				fgets(buffer,sizeof(buffer),f);
-				//printf("[%s]\n",buffer);
-				if (buffer[0] == 'S') _SRECProcessMotorola(buffer);
-				if (buffer[0] == ':') _SRECProcessIntel(buffer);
-			}
-			fclose(f);
+			processed = -1;
+		}
+
+																// Check for known load types
+		if (strcmp(fnType,".pgx") == 0 || strcmp(fnType,".pgx") == 0) {
+			FFMTLoad(argv[i],FFMT_PGX);
+			processed = -1;
+		}
+		if (strcmp(fnType,".pgz") == 0 || strcmp(fnType,".PGZ") == 0) {
+			FFMTLoad(argv[i],FFMT_PGZ);
+			processed = -1;
+		}
+
+		if (processed == 0) { 									// Couldn't figure it out, try sRec
+			_SRECAttemptLoad(argv[i]);
 		}
 	}
 	return autoRun;
@@ -137,6 +169,7 @@ int SRECHandler(int argc,char *argv[]) {
 //	
 //		Date 			Changes
 //		---- 			-------
+//		12-03-22 		Some reorganisation to allow different file formats other than SREC.
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************
