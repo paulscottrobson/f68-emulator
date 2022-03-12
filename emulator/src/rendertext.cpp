@@ -122,13 +122,16 @@ void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem
 		xCursor = (vicky[0x16] << 8) + vicky[0x17];
 	}
 
+	int scaling = (vicky[2] & 4) ? 2 : 1; 				// scaling.
+
 	SDL_Rect rc,rcp;
 
-	for (int x = 0;x < cWidth;x++) { 					// Scan column and row
-		for (int y = 0;y < cHeight;y++) {
-			rc.x = xOrg+x*8*d->pSize; 					// RC is text chara position
-			rc.y = yOrg+y*8*d->pSize;
-			rc.w = rc.h = d->pSize;
+	for (int x = 0;x < cWidth/scaling;x++) { 			// Scan column and row
+		for (int y = 0;y < cHeight/scaling;y++) {
+			rc.x = xOrg+x*8*d->pSize*scaling; 			// RC is text chara position
+			rc.y = yOrg+y*8*d->pSize*scaling;
+			rc.w = rc.h = d->pSize*scaling;
+
 			int offset = x+y*cBWidth; 					// Position in Text VRAM 
 			int ch = charMem[offset]; 					// Char and colour byte here
 			int col = colMem[offset];
@@ -148,14 +151,14 @@ void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem
 			for (int yc = 0;yc < 8;yc++) { 				// Draw the character out
 				int bitLine = fontMem[ch * 8 + yc];
 				rcp = rc;
-				rc.y += d->pSize;
+				rc.y += d->pSize*scaling;
 				for (int xc = 0;xc < 8;xc++) {		
 					if (bitLine & 0x80)	{
 						GFXRectangle(&rcp,fgr); 
 					} else {
 						if (bgTransparent == 0) GFXRectangle(&rcp,bgr);
 					}
-					rcp.x += d->pSize;
+					rcp.x += rcp.w;
 					bitLine <<= 1;
 				}
 			}
@@ -171,6 +174,7 @@ void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem
 //		Date 			Changes
 //		---- 			-------
 //		11-Mar-22 		Code reorganisation to allow overlay
+//		12-Mar-22 		Handle double size display
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

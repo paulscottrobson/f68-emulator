@@ -84,7 +84,7 @@ void MEMRenderDisplay(void) {
 															hwMemory+0x6C400,hwMemory+0x48000);	
 	} else {
 		HWGetDisplayInfo(&di,'B',hwMemory+0x80000,&rc);
-		HWRenderBitmap(&di,hwMemory+0x80000,videoMemory);
+		HWRenderBitmap(&di,hwMemory+0x80000,videoMemory,0);
 		HWRenderTextScreen(&di,hwMemory+0x80000,hwMemory+0xA0000,hwMemory+0xA8000,
 															hwMemory+0xAC400,hwMemory+0x88000);
 	}

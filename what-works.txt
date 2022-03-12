@@ -22,6 +22,7 @@ Vicky 3
 Seperate displays for 3A/3B F3 toggles between them.
 Vicky3A : 800x600 or 1024x768 resolution
 Vicky3B : 640x480 or 800x600 resolution (640x400 is not supported)
+Pixel Doubling (e.g. resolution halving)
 
 Text
 ----

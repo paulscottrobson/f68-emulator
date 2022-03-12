@@ -1,7 +1,7 @@
 Test
 ====
 
+- Generalise, and add Second bitmap.
 - Add Mouse (under consideration, position unclear)
 - Add Sprites
-- Generalise, and add Second bitmap.
 - Add tiles

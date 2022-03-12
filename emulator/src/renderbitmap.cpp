@@ -23,11 +23,12 @@ LONG32 HWReadLong(BYTE8 *p) {
 //													Render text screen
 // *******************************************************************************************************************************
 
-void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem) {
+void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem,int bitmapID) {
 
 	if ((vicky[3] & 0x08) == 0) return; 				// No bitmap mode enabled.
 	if ((vicky[0x103] & 0x01) == 0) return; 			// Layer not enabled.
 
+	int scaling = (vicky[2] & 4) ? 2 : 1; 				// scaling.
 
 	int convLuts[256]; 									// Convert LUTs when needed.
 	for (int i = 0;i < 256;i++) convLuts[i] = -1;
@@ -39,10 +40,14 @@ void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem) {
 
 	int baseLut = ((vicky[0x103] >> 1) & 7) * 0x400;	// Which LUT set ?
 
-	for (int y = 0;y < d->dHeight;y++) {
-		rc.x = d->rcDraw.x;rc.y = d->rcDraw.y+y*d->pSize;rc.w = rc.h = d->pSize;
-		for (int x = 0;x < d->dWidth;x++) {
-			int col = *pixData++;
+	int xSize = d->dWidth/scaling; 						// Pixels to draw
+	int ySize = d->dHeight/scaling;
+
+	for (int y = 0;y < ySize;y++) {
+		rc.x = d->rcDraw.x;rc.y = d->rcDraw.y+y*d->pSize*scaling;
+		rc.w = rc.h = d->pSize * scaling;		
+		for (int x = 0;x < xSize;x++) {
+			int col = pixData[x];
 				if (col != 0) {
 					if (convLuts[col] < 0) {
 						convLuts[col] = HWConvertVickyBitmapLUT(vicky+0x2000+baseLut+col*4);
@@ -51,6 +56,7 @@ void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem) {
 			}
 			rc.x += rc.w;
 		}
+		pixData += d->dWidth;
 	}
 }
 
@@ -62,6 +68,7 @@ void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem) {
 //		Date 			Changes
 //		---- 			-------
 //		11-Mar-22 		Code reorganisation to allow overlay
+//		12-Mar-22 		Handle double size display
 //
 // *******************************************************************************************************************************
 // *******************************************************************************************************************************

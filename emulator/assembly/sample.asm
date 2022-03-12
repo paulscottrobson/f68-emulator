@@ -35,14 +35,27 @@ copymessage:
 				tst 	(a1) 						; is it zero.
 				bne 	copymessage 				; do until trailing 0 found.
 				dbne 	d0,repeatmessage 			; do it again !
-				;
-				; 		Exit the program.
-				;
 
 				lea 	vicky3,a0 					; start register writes
-				move.l 	#$0000000F,(a0) 			; graphics mode & bitmap on, text overlay on.
+				move.l 	#$0000040F,(a0) 			; graphics mode & bitmap on, text overlay on.
 
-;				move.l 	#4,$FFFFFFF8
+				move.l 	#$FECA8000,a0 				; make text backgrounds all zero.
+				move.w 	#$7FFF,d0 
+_ZeroLSN:		and.b 	#$F0,(a0)+
+				dbra 	d0,_ZeroLSN
+
+				lea 	$00900000,a0 
+				;move.l 	#$00100000,$FEC80104
+
+				move.w 	#470,d1
+_Loop1:			move.w 	#639,d0
+_Loop2:			btst 	#3,d0
+				bne 	_Skip1
+				move.b 	d0,(a0)
+_Skip1:				
+				addq 	#1,a0
+				dbra 	d0,_Loop2
+				dbra 	d1,_Loop1
 
 done:           clr.l d0                            ; sys_exit
                 clr.l d1                            ; Return value = 0

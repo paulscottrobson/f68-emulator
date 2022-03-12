@@ -44,7 +44,7 @@ void MEMRenderDisplay(void);
 
 void HWGetDisplayInfo(DISPLAYINFO *d,char vType,BYTE8 *vicky,SDL_Rect *rDrawArea);
 void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYTE8 *lutMem,BYTE8 *fontMem);
-void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem);
+void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem,int bitmapID);
 
 int HWConvertVickyTextLUT(BYTE8 *lut);
 int HWConvertVickyBitmapLUT(BYTE8 *lut);

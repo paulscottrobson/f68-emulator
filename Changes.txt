@@ -22,3 +22,7 @@ Build 9 12/3/22
 
 	- Added loaders subdirectory which generates test loaders for PGX and PGZ.
 	- Added code to load PGX and PGZ files.
+
+Build 10 12/3/22
+
+	- Doubling Pixel Mode bit supported.
