@@ -56,7 +56,7 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
 static int isRunning = -1;																// Is app running
 
-void GFXStart(int autoStart) {
+void GFXStart(int autoStart,int scale) {
 
 	SDL_Event event;
 
@@ -76,7 +76,7 @@ void GFXStart(int autoStart) {
 		}
 		SDL_FillRect(mainSurface, NULL, 											// Draw the background.
 							SDL_MapRGB(mainSurface->format, RED(background),GREEN(background),BLUE(background)));
-		GFXXRender(mainSurface,autoStart);											// Ask app to render state.
+		GFXXRender(mainSurface,autoStart,scale);											// Ask app to render state.
 		SDL_UpdateWindowSurface(mainWindow);										// And update the main window.
 	}
 	SDL_CloseAudio();

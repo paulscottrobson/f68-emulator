@@ -72,11 +72,11 @@ void MEMEndRun(void) {
 //														Render the display
 // *******************************************************************************************************************************
 
-void MEMRenderDisplay(void) {
+void MEMRenderDisplay(int scale) {
 	SDL_Rect rc; 
 	DISPLAYINFO di;
-	rc.w = WIN_WIDTH;rc.h = WIN_HEIGHT;
-	rc.x = WIN_WIDTH/2 - rc.w/2;rc.y = WIN_HEIGHT/2-rc.h/2;
+	rc.w = WIN_WIDTH*scale; rc.h = WIN_HEIGHT*scale;
+	rc.x = WIN_WIDTH*scale/2 - rc.w/2; rc.y = WIN_HEIGHT*scale/2 - rc.h/2;
 	 													
 	if (GFXGetDisplayToggle() & 1) {
 		HWGetDisplayInfo(&di,'A',hwMemory+0x40000,&rc);

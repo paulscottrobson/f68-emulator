@@ -15,8 +15,7 @@
 int getScale(int argc, char* argv[]) {
 	for (int i = 1; i < argc; ++ i) {
 		if (strstr(argv[i], "-scale=") != 0) {
-			printf("Found scale\n");
-			return atoi(&argv[i][7]);
+			return std::max(atoi(&argv[i][7]), 1);
 		}
 	}
 	return 1;
@@ -30,7 +29,7 @@ int main(int argc,char *argv[]) {
 
 	int scale = getScale(argc, argv);
 	GFXOpenWindow(title,WIN_WIDTH * scale,WIN_HEIGHT * scale,WIN_BACKCOLOUR);
-	GFXStart(runNow);
+	GFXStart(runNow,scale);
 	MEMEndRun();
 	GFXCloseWindow();
 	return(0);
