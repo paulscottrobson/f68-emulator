@@ -53,7 +53,7 @@ void HWGetDisplayInfo(DISPLAYINFO *d,char vType,BYTE8 *vicky,SDL_Rect *rDrawArea
 	} else { 											// Vicky III B resolutions
 		pWidth = 640;
 		pHeight = 480;
-		if (vicky[2] & 0x01) { 
+		if (vicky[2] & 0x02) { 
 			pWidth = 800;pHeight = 600; 
 		}
 	}		

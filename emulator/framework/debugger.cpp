@@ -120,9 +120,11 @@ void GFXXRender(SDL_Surface *surface,int autoStart) {
 		if (frameRate == 0) {														// Run code with step breakpoint, maybe.
 			inRunMode = 0;															// Break has occurred.
 		} else {
+			/*
 			int exceeded = SDL_GetTicks() - nextFrame;
 			if (exceeded > 0)
 				printf("Frame time exceeded by %d ms\n", exceeded);
+				*/
 
 			while (SDL_GetTicks() < nextFrame) { SDL_Delay(1); };									// Wait for frame timer to elapse.
 			nextFrame = SDL_GetTicks() + 1000 / frameRate;							// And calculate the next sync time.
