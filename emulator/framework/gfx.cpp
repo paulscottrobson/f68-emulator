@@ -32,13 +32,12 @@ static Beeper beeper;
 // *******************************************************************************************************************************
 
 void GFXOpenWindow(const char *title,int width,int height,int colour) {
-
 	if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)	{							// Try to initialise SDL Video and Audio
 		exit(printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError()));
 	}
 
 	mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, 					// Try to create a window
-							SDL_WINDOWPOS_UNDEFINED, width,height, SDL_WINDOW_SHOWN );
+							SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
 	if (mainWindow == NULL) {
 		exit(printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() ));
 	}
