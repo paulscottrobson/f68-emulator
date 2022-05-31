@@ -4,7 +4,7 @@
 
 #include "constants.h"
 #include "vicky_general.h"
-#include "text_screen_iii.h"
+#include "dev/txt_screen.h"
 #include "simpleio.h"
 #include "sys_general.h"
 #include "rsrc/font/MSX_CP437_8x8.h"
@@ -211,31 +211,30 @@ int text_init() {
         text_set_border(0, 1, 0x20, 0x10, border_color);
     }
 
+
 #if MODEL == MODEL_FOENIX_A2560K
 
-    *chan_b = *chan_a;
-    
-    chan_a->master_control = MasterControlReg_B;
-    chan_a->text_cells = ScreenText_B;
-    chan_a->color_cells = ColorText_B;
-    chan_a->cursor_settings = CursorControlReg_L_B;
-    chan_a->cursor_position = CursorControlReg_H_B;
-    chan_a->border_control = BorderControlReg_L_B;
-    chan_a->font_size_ctrl = 0;
-    chan_a->font_count_ctrl = 0;
+    chan_b->master_control = MasterControlReg_B;
+    chan_b->text_cells = ScreenText_B;
+    chan_b->color_cells = ColorText_B;
+    chan_b->cursor_settings = CursorControlReg_L_B;
+    chan_b->cursor_position = CursorControlReg_H_B;
+    chan_b->border_control = BorderControlReg_L_B;
+    chan_b->font_size_ctrl = 0;
+    chan_b->font_count_ctrl = 0;
 
     if (need_hires) {
-        *chan_a->master_control = VKY3_MCR_800x600 | VKY3_MCR_TEXT_EN;      /* Set to text only mode: 800x600 */
+        *chan_b->master_control = VKY3_MCR_800x600 | VKY3_MCR_TEXT_EN;      /* Set to text only mode: 800x600 */
     } else {
-        *chan_a->master_control = VKY3_MCR_640x480 | VKY3_MCR_TEXT_EN;      /* Set to text only mode: 640x480 */
+        *chan_b->master_control = VKY3_MCR_640x480 | VKY3_MCR_TEXT_EN;      /* Set to text only mode: 640x480 */
     }
 
-    text_set_border(0, 1, 0x20, 0x10, border_color);
-    text_setsizes(0);
-    text_set_color(0, 0x0f, 0x04);
-    text_clear(0, 2);
-    text_set_cursor(0, 0xF3, 0x7F, 1, 1);
-    text_set_xy(0, 0, 0);
+    text_set_border(1, 1, 0x20, 0x10, border_color);
+    text_setsizes(1);
+    text_set_color(1, 0x0f, 0x04);
+    text_clear(1, 2);
+    text_set_cursor(1, 0xF3, 0x7F, 1, 1);
+    text_set_xy(1, 0, 0);
 
     /* Set the font for channel B */
 

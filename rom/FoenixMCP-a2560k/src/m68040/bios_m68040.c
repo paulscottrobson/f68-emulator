@@ -8,12 +8,15 @@
 #include "types.h"
 #include "syscalls.h"
 #include "interrupt.h"
+#include "memory.h"
 #include "proc.h"
 #include "dev/channel.h"
 #include "dev/block.h"
 #include "dev/fsys.h"
 #include "dev/rtc.h"
+#include "dev/txt_screen.h"
 #include "sys_general.h"
+#include "variables.h"
 
 #if MODEL == MODEL_FOENIX_A2560K
 #include "dev/kbd_mo.h"
@@ -41,11 +44,11 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
 
                 case KFN_INT_ENABLE:
                     int_enable((unsigned short)param0);
-                    return;
+                    return 0;
 
                 case KFN_INT_DISABLE:
                     int_disable((unsigned short)param0);
-                    return;
+                    return 0;
 
                 case KFN_INT_ENABLE_ALL:
                     return int_enable_all();
@@ -55,14 +58,14 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
 
                 case KFN_INT_CLEAR:
                     int_clear((unsigned short)param0);
-                    return;
+                    return 0;
 
                 case KFN_INT_PENDING:
                     return int_pending((unsigned short)param0);
 
                 case KFN_SYS_GET_INFO:
                     sys_get_information((p_sys_info)param0);
-                    return;
+                    return 0;
 
                 default:
                     return ERR_GENERAL;
@@ -82,10 +85,10 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
                     return chan_read_b((short)param0);
 
                 case KFN_CHAN_READ:
-                    return chan_read((short)param0, (const uint8_t *)param1, (short)param2);
+                    return chan_read((short)param0, (unsigned char *)param1, (short)param2);
 
                 case KFN_CHAN_READ_LINE:
-                    return chan_readline((short)param0, (const uint8_t *)param1, (short)param2);
+                    return chan_readline((short)param0, (unsigned char *)param1, (short)param2);
 
                 case KFN_CHAN_STATUS:
                     return chan_status((short)param0);
@@ -108,9 +111,11 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
                 case KFN_CHAN_REGISTER:
                     return cdev_register((p_dev_chan)param0);
 
-                case KFN_TEXT_SETSIZES:
-                    text_setsizes((short)param0);
-                    return 0;
+                case KFN_CHAN_SWAP:
+                    return chan_swap((short)param0, (short)param1);
+
+                case KFN_CHAN_DEVICE:
+                    return chan_device((short)param0);
 
                 default:
                     return ERR_GENERAL;
@@ -186,7 +191,7 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
                     return fsys_setlabel((short)param0, (char *)param1);
 
                 case KFN_GET_CWD:
-                    return fsys_get_cwd((char *)param0);
+                    return fsys_get_cwd((char *)param0, (short)param1);
 
                 case KFN_SET_CWD:
                     return fsys_set_cwd((char *)param0);
@@ -204,8 +209,19 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
             /* Process and Memory functions */
             switch (function) {
                 case KFN_RUN:
-                    return proc_run((char *)param0, (int)param1, (char *)param2);
-                    break;
+                    return proc_run((char *)param0, (int)param1, (char **)param2);
+
+                case KFN_MEM_GET_RAMTOP:
+                    return (unsigned long)mem_get_ramtop();
+
+                case KFN_MEM_RESERVE:
+                    return mem_reserve((unsigned long)param0);
+
+                case KFN_VAR_SET:
+                    return var_set((const char *)param0, (const char *)param1);
+
+                case KFN_VAR_GET:
+                    return (unsigned long)var_get((const char *)param0);
 
                 default:
                     return ERR_GENERAL;
@@ -246,6 +262,104 @@ unsigned long syscall_dispatch(int32_t function, int32_t param0, int32_t param1,
                 default:
                     return ERR_GENERAL;
             }
+            break;
+
+        case 0x60:
+            /* Text mode operations */
+            switch (function) {
+                case KFN_TEXT_INIT_SCREEN:
+                    /* Reset a screen to its default mode */
+                    txt_init_screen((short)param0);
+                    return 0;
+
+                case KFN_TXT_GET_CAPS:
+                    /* Get the capabilities of a screen */
+                    return (unsigned long)txt_get_capabilities((short)param0);
+
+                case KFN_TXT_SET_MODE:
+                    /* Set the display mode of a screen */
+                    return txt_set_mode((short)param0, (short)param1);
+
+                case KFN_TEXT_SETSIZES:
+                    /* Adjusts the screen size based on the current graphics mode */
+                    return txt_setsizes((short)param0);
+
+                case KFN_TXT_SET_RESOLUTION:
+                    /* Set the base display resolution for a screen */
+                    return txt_set_resolution((short)param0, (short)param1, (short)param2);
+
+                case KFN_TXT_SET_BORDER:
+                    /* Set the size of the border */
+                    txt_set_border((short)param0, (short)param1, (short)param2);
+                    return 0;
+
+                case KFN_TXT_SET_BORDERCOLOR:
+                    /* Set the border color */
+                    txt_set_border_color((short)param0, (unsigned char)param1, (unsigned char)param2, (unsigned char)param3);
+                    return 0;
+
+                case KFN_TXT_SET_FONT:
+                    /* Set the font for the screen's text mode (if applicable) */
+                    return txt_set_font((short)param0, (short)param1, (short)param2, (unsigned char *)param3);
+
+                case KFN_TXT_SET_CURSOR:
+                    /* Set the text-mode cursor look */
+                    txt_set_cursor((short)param0, (short)param1, (short)param2, (char)param3);
+                    return 0;
+
+                case KFN_TXT_SET_REGION:
+                    /* Sets the clipping/scrolling region for further text operations */
+                    return txt_set_region((short)param0, (p_rect)param1);
+
+                case KFN_TXT_GET_REGION:
+                    /* Gets the current clipping/scrolling region */
+                    return txt_get_region((short)param0, (p_rect)param1);
+
+                case KFN_TXT_SET_COLOR:
+                    /* Sets the foreground and background text colors */
+                    return txt_set_color((short)param0, (unsigned char)param1, (unsigned char)param2);
+
+                case KFN_TXT_GET_COLOR:
+                    /* Gets the foreground and background text colors */
+                    txt_get_color((short)param0, (unsigned char *)param1, (unsigned char *)param2);
+                    return 0;
+
+                case KFN_TXT_SET_XY:
+                    /* Sets the cursor's position */
+                    txt_set_xy((short)param0, (short)param1, (short)param2);
+                    return 0;
+
+                case KFN_TXT_GET_XY:
+                    /* Gets the cursor's position */
+                    txt_get_xy((short)param0, (p_point)param1);
+                    return 0;
+
+                case KFN_TXT_SCROLL:
+                    /* Scroll the current region */
+                    txt_scroll((short)param0, (short)param1, (short)param2);
+                    return 0;
+
+                default:
+                    return ERR_GENERAL;
+            }
+            break;
+
+        case 0x70:
+            /* Text calls #2 */
+            switch (function) {
+                case KFN_TXT_SET_CURSOR_VIS:
+                    /* Set the cursor visibility */
+                    txt_set_cursor_visible((short)param0, (short)param1);
+                    return 0;
+
+                case KFN_TXT_GET_SIZES:
+                    txt_get_sizes((short)param0, (p_extent)param1, (p_extent)param2);
+                    return 0;
+
+                default:
+                    return ERR_GENERAL;
+            }
+            break;
 
         default:
             break;
