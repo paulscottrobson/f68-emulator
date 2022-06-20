@@ -15,6 +15,8 @@ static BYTE8 icr[6];
 static BYTE8 mauQueue = 0;
 static LONG32 timers[5];
 
+#define i_to_bcd(i) (((i) / 10) << 4) | ((i) % 10)
+
 // *******************************************************************************************************************************
 //
 //													Read Gavin Memory
@@ -62,13 +64,13 @@ int Gavin_Read(int offset,BYTE8 *memory,int size) {
 	    time_t t;
 	    t = time(NULL);
 	    ptr = localtime(&t);
-		memory[0x80] = ptr->tm_sec; 					// seconds
-		memory[0x82] = ptr->tm_min; 					// minuts
-		memory[0x84] = ptr->tm_hour; 					// hours
-		memory[0x86] = ptr->tm_mday; 					// day
-		memory[0x88] = ptr->tm_wday; 					// day of week
-		memory[0x89] = ptr->tm_mon; 					// month
-		memory[0x8A] = ptr->tm_year % 100; 				// year
+		memory[0x80] = i_to_bcd(ptr->tm_sec); 					// seconds
+		memory[0x82] = i_to_bcd(ptr->tm_min); 					// minuts
+		memory[0x84] = i_to_bcd(ptr->tm_hour); 					// hours
+		memory[0x86] = i_to_bcd(ptr->tm_mday); 					// day
+		memory[0x88] = i_to_bcd(ptr->tm_wday); 					// day of week
+		memory[0x89] = i_to_bcd(ptr->tm_mon); 					// month
+		memory[0x8A] = i_to_bcd(ptr->tm_year % 100); 			// year
 	}
 	//
 	//		Default
