@@ -94,8 +94,10 @@ int CPUExecuteInstruction(void) {
 	if (cycles >= 0 ) return 0;														// Not completed a frame.
 	cycles = cycles + CYCLES_PER_FRAME;												// Adjust this frame rate, up to x16 on HS
 	HWSync();																		// Update any hardware
-	GAVIN_FlagInterrupt(1,1); 								 						// Bit 0 of ICR 1 (Vicky A)
+	GAVIN_FlagInterrupt(0,0x0001); 								 						// Bit 0 of ICR 1 (Vicky A)
 	m68k_set_irq(IRQ_VICKY_A); 															// Interrupt level 5 (Vicky A)
+	GAVIN_FlagInterrupt(0,0x0100); 								 						// Bit 8 of ICR 1 (Vicky B)
+	m68k_set_irq(IRQ_VICKY_B); 															// Interrupt level 5 (Vicky A)
 	GAVIN_UpdateTimers(CYCLES_PER_FRAME,1); 										// Update the timers.
 	return FRAME_RATE;																// Return frame rate.	
 }
