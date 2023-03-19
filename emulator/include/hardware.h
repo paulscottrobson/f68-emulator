@@ -34,6 +34,7 @@ typedef struct _DisplayInfo
 int Gavin_Read(int offset,BYTE8 *memory,int size);
 int Gavin_Write(int offset,BYTE8 *memory,int value,int size);
 
+int GAVIN_InterruptLevel(void);
 void GAVIN_FlagInterrupt(int offset,int bitMask);
 void GAVIN_InsertMauFIFO(int mau);
 void GAVIN_UpdateTimers(int cycles,int frames);

@@ -46,8 +46,12 @@ void  HWScanCodeHandler(int scancode,int keydown) {
 	if (mau_table[n] == scancode && mau_table[n] != 0 && mau_table[n] != 0x80) {		
 		int mau = n | (keydown ? 0x00:0x80);
 		GAVIN_InsertMauFIFO(mau);
-		GAVIN_FlagInterrupt(3,2); 								 						// Bit 0 of ICR 1 (Gavin SuperIO)		
-		m68k_set_irq(IRQ_GAVIN_SUPERIO); 												// Interrupt level 4 (Gavin SuperIO)
+		GAVIN_FlagInterrupt(3,0x02); 							 						// Bit 1 of ICR 1 (Gavin SuperIO)		
+
+		int level = GAVIN_InterruptLevel();
+		if (level != -1) {
+			m68k_set_irq(level);
+		}
 	}
 }
 

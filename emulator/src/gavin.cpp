@@ -11,11 +11,14 @@
 
 #include <includes.h>
 
-static BYTE8 icr[6];
+static BYTE8 icr[32];
 static BYTE8 mauQueue = 0;
 static LONG32 timers[5];
 
 #define i_to_bcd(i) (((i) / 10) << 4) | ((i) % 10)
+
+#define HW_IS_GAVIN_IRQ_PENDING(a)  (((a) >= 0x100) && ((a) < 0x106))
+#define HW_IS_GAVIN_IRQ_MASK(a)  (((a) >= 0x118) && ((a) < 0x11E))
 
 // *******************************************************************************************************************************
 //
@@ -89,10 +92,17 @@ int Gavin_Write(int offset,BYTE8 *memory,int value,int size) {
 //	printf("GAVIN:Writing memory %04x value %02x %d\n",offset,value,size);
 //	printf("Gaving Address %x\n",memory);
 	//
-	//		Writing to ICR ands the bits with the value. 
+	//		Writing to ICR pending register ANDs the bits with the complemented value. 
 	//
-	if (HW_IS_GAVIN_INTERRUPTCTRL(offset)) {
-		icr[offset - 0x100] &= value;
+	if (HW_IS_GAVIN_IRQ_PENDING(offset)) {
+		icr[offset - 0x100] &= ~value;
+		return 1;
+	}
+	//
+	//		Writing to ICR mask register replaces all bits. 
+	//
+	if (HW_IS_GAVIN_IRQ_MASK(offset)) {
+		icr[offset - 0x100] = value;
 		return 1;
 	}
 	//
@@ -105,6 +115,37 @@ int Gavin_Write(int offset,BYTE8 *memory,int value,int size) {
 		}
 	}
 	return 0;
+}
+
+
+// *******************************************************************************************************************************
+//
+//													Gavin - Interrupt level
+//
+// *******************************************************************************************************************************
+
+int GAVIN_InterruptLevel(void) {
+	// Vicky B (6)
+	if (icr[0x00 + 0] & ~icr[0x18 + 0]) {
+		return IRQ_VICKY_B;
+	}
+
+	// Vicky A (5)
+	if (icr[0x00 + 1] & ~icr[0x18 + 1]) {
+		return IRQ_VICKY_A;
+	}
+
+	// Gavin SuperIO (4)
+	if (icr[0x00 + 3] & ~icr[0x18 + 3]) {
+		return IRQ_GAVIN_SUPERIO;
+	}
+
+	// Gavin timer etc (3)
+	if (icr[0x00 + 2] & ~icr[0x18 + 2]) {
+		return IRQ_GAVIN_TIMER;
+	}
+
+	return -1;
 }
 
 // *******************************************************************************************************************************
