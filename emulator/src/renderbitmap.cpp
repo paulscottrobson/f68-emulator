@@ -56,7 +56,7 @@ void HWRenderBitmap(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *videoMem,int bitmapID) {
 			}
 			rc.x += rc.w;
 		}
-		pixData += d->dWidth;
+		pixData += d->dWidth/scaling;
 	}
 }
 
