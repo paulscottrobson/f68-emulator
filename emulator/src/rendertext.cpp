@@ -16,23 +16,11 @@
 // *******************************************************************************************************************************
 
 int HWConvertVickyTextLUT(BYTE8 *lut) {
-	int parts[4];
-	for (int i = 0;i < 4;i++) {
-		parts[i] = (lut[i]) >> 4;
-		if (parts[i] < 0) parts[i] = 0;
-		if (parts[i] > 15) parts[i] = 15;
-	}
-	return parts[3]+(parts[2] << 4)+(parts[1] << 8);		// ARGB Bigendian
+	return (lut[1] << 16) | (lut[2] << 8) | lut[3];		// BGRA big endian
 }
 
 int HWConvertVickyBitmapLUT(BYTE8 *lut) {
-	int parts[4];
-	for (int i = 0;i < 4;i++) {
-		parts[i] = (lut[i]) >> 4;
-		if (parts[i] < 0) parts[i] = 0;
-		if (parts[i] > 15) parts[i] = 15;
-	}
-	return parts[0]+(parts[1] << 4)+(parts[2] << 8);		// ARGB Bigendian
+	return (lut[2] << 16) | (lut[1] << 8) | lut[0];		// BGRA big endian
 }
 
 // *******************************************************************************************************************************

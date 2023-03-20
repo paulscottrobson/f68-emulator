@@ -16,9 +16,9 @@ static SDL_Surface *mainSurface = NULL;
 static int background;
 static int displaySelectCount = 0;
 
-#define RED(x) ((((x) >> 8) & 0xF) * 17)
-#define GREEN(x) ((((x) >> 4) & 0xF) * 17)
-#define BLUE(x) ((((x) >> 0) & 0xF) * 17)
+#define RED(x) (((x) >> 16) & 0xFF)
+#define GREEN(x) (((x) >> 8) & 0xFF)
+#define BLUE(x) ((x) & 0xFF)
 
 static void _GFXInitialiseKeyRecord(void);
 static void _GFXUpdateKeyRecord(int scancode,int isDown);
