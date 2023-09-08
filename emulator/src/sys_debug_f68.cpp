@@ -27,7 +27,7 @@ static const char *labels2[] = { "SP","USP","ISP","CY",NULL };
 #define IR (DW_WIDTH-8)
 #define IL (IR-4-1-8)
 
-void DBGXRender(int *address,int showDisplay) {
+void DBGXRender(int *address,int showDisplay, int scale) {
 
 	int n = 0,xc,yc;
 	char buffer[64];
@@ -93,7 +93,7 @@ void DBGXRender(int *address,int showDisplay) {
 			p += c;
 		}
 	} else {
-		MEMRenderDisplay();
+		MEMRenderDisplay(scale);
 	}
 	MEMSetAddressLog(1);																// Address log on.
 }	

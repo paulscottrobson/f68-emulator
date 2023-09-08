@@ -135,6 +135,10 @@ int SRECHandler(int argc,char *argv[]) {
 	for (int i = 1;i < argc;i++) {
 		int processed = 0;
 
+		if (argv[i][0] == '-') {
+			continue;
+		}
+
 		fnType[0] = '\0';										// Get file name type
 		if (strlen(argv[i]) > 3) {
 			strcpy(fnType,argv[i]+strlen(argv[i])-4);

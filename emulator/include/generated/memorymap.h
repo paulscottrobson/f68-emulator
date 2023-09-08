@@ -1,7 +1,7 @@
 //
 //	Automatically generated.
 //
-#define BUILD_TIME ("Sat 12-Mar-2022 20:42")
+#define BUILD_TIME ("Sun 19-Mar-2023 11:32")
 
 #define ADDRESS_MASK (0xFFFFFFFF)
 
@@ -41,6 +41,6 @@
 
 #define HW_IS_GAVIN_READMAU(a)  ((a) == 0x40)
 #define HW_IS_GAVIN_RTC(a)  (((a) >= 0x80) && ((a) < 0x8a))
-#define HW_IS_GAVIN_INTERRUPTCTRL(a)  (((a) >= 0x100) && ((a) < 0x106))
+#define HW_IS_GAVIN_INTERRUPTCTRL(a)  (((a) >= 0x100) && ((a) < 0x120))
 #define HW_IS_GAVIN_TIMERS(a)  (((a) >= 0x208) && ((a) < 0x230))
 #define HW_IS_GAVIN_READPS2(a)  (((a) >= 0x2060) && ((a) < 0x2068))

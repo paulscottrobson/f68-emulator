@@ -16,9 +16,9 @@ static SDL_Surface *mainSurface = NULL;
 static int background;
 static int displaySelectCount = 0;
 
-#define RED(x) ((((x) >> 8) & 0xF) * 17)
-#define GREEN(x) ((((x) >> 4) & 0xF) * 17)
-#define BLUE(x) ((((x) >> 0) & 0xF) * 17)
+#define RED(x) (((x) >> 16) & 0xFF)
+#define GREEN(x) (((x) >> 8) & 0xFF)
+#define BLUE(x) ((x) & 0xFF)
 
 static void _GFXInitialiseKeyRecord(void);
 static void _GFXUpdateKeyRecord(int scancode,int isDown);
@@ -32,13 +32,12 @@ static Beeper beeper;
 // *******************************************************************************************************************************
 
 void GFXOpenWindow(const char *title,int width,int height,int colour) {
-
 	if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)	{							// Try to initialise SDL Video and Audio
 		exit(printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError()));
 	}
 
 	mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, 					// Try to create a window
-							SDL_WINDOWPOS_UNDEFINED, width,height, SDL_WINDOW_SHOWN );
+							SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
 	if (mainWindow == NULL) {
 		exit(printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() ));
 	}
@@ -57,7 +56,7 @@ void GFXOpenWindow(const char *title,int width,int height,int colour) {
 
 static int isRunning = -1;																// Is app running
 
-void GFXStart(int autoStart) {
+void GFXStart(int autoStart,int scale) {
 
 	SDL_Event event;
 
@@ -77,7 +76,7 @@ void GFXStart(int autoStart) {
 		}
 		SDL_FillRect(mainSurface, NULL, 											// Draw the background.
 							SDL_MapRGB(mainSurface->format, RED(background),GREEN(background),BLUE(background)));
-		GFXXRender(mainSurface,autoStart);											// Ask app to render state.
+		GFXXRender(mainSurface,autoStart,scale);											// Ask app to render state.
 		SDL_UpdateWindowSurface(mainWindow);										// And update the main window.
 	}
 	SDL_CloseAudio();

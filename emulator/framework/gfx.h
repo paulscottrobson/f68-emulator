@@ -27,7 +27,7 @@ int _GFXY(int y);
 int _GFXS(void);
 
 void GFXOpenWindow(const char *title,int width,int height,int colour);
-void GFXStart(int autoStart);
+void GFXStart(int autoStart,int scale);
 void GFXExit(void);
 void GFXCloseWindow(void);
 
@@ -43,7 +43,7 @@ void GFXDefineCharacter(int nChar,int b1,int b2,int b3,int b4,int b5);
 int GFXGetDisplayToggle(void);
 void GFXCloseOnDebug(void);
 
-void GFXXRender(SDL_Surface *surface,int autoStart);
+void GFXXRender(SDL_Surface *surface,int autoStart,int scale);
 void GFXSetFrequency(int freq);
 
 class Beeper

@@ -21,19 +21,26 @@ MEMORY := flash
 # MODEL_FOENIX_A2560U_PLUS    6
 # MODEL_FOENIX_A2560X         8
 # MODEL_FOENIX_A2560U         9
-# MODEL_FOENIX_A2560K         13
+# MODEL_FOENIX_A2560K         11
 
 # Determine target CPU and MODEL based on the UNIT
 
 ifeq ($(UNIT),a2560k)
-export CPU_NUMBER = 36		# M68040
+export CPU_NUMBER = 6		# M68040V
 export VASM_CPU = -m68040	# VASM CPU flag
 export VBCC_CPU = 68040		# VBCC CPU flag
-export MODEL_NUMBER = 13	# A2560K
+export MODEL_NUMBER = 11	# A2560K
+export cpu = m68040
+
+else ifeq ($(UNIT),genx)
+export CPU_NUMBER = 6		# M68040V
+export VASM_CPU = -m68040	# VASM CPU flag
+export VBCC_CPU = 68040		# VBCC CPU flag
+export MODEL_NUMBER = 4		# GenX
 export cpu = m68040
 
 else ifeq ($(UNIT),a2560u)
-export CPU_NUMBER = 32		# M68000
+export CPU_NUMBER = 0		# M680SEC00
 export VASM_CPU = -m68000	# VASM CPU flag
 export VBCC_CPU = 68000		# VBCC CPU flag
 export MODEL_NUMBER = 9		# A2560U
@@ -67,9 +74,9 @@ cpu_c_src := $(wildcard $(cpu)/*.c)
 cpu_assembly_obj := $(subst .s,.o,$(cpu_assembly_src))
 cpu_c_obj := $(subst .c,.o,$(cpu_c_src))
 
-dev_base_sources = dev/block.c dev/channel.c dev/console.c dev/fsys.c dev/pata.c dev/ps2.c dev/rtc.c dev/sdc.c dev/text_screen_iii.c dev/uart.c
+dev_base_sources = dev/block.c dev/channel.c dev/console.c dev/fsys.c dev/pata.c dev/ps2.c dev/rtc.c dev/sdc.c dev/txt_screen.c dev/uart.c
 ifeq ($(UNIT),a2560k)
-dev_c_src := $(dev_base_sources) dev/fdc.c dev/kbd_mo.c dev/lpt.c dev/midi.c
+dev_c_src := $(dev_base_sources) dev/fdc.c dev/kbd_mo.c dev/lpt.c dev/midi.c dev/txt_a2560k_a.o dev/txt_a2560k_b.o m68040/fdc_m68040.o
 else
 dev_c_src := $(dev_base_sources)
 endif
@@ -86,7 +93,11 @@ c_obj := $(subst .c,.o,$(c_src))
 
 .PHONY: all $(cpu) dev fatfs snd cli
 
+ifeq ($(MEMORY),ram)
 all: foenixmcp.s68 $(cpu) dev snd cli
+else
+all: foenixmcp.bin $(cpu) dev snd cli
+endif
 
 $(cpu):
 	$(MAKE) --directory=$@
@@ -105,6 +116,9 @@ cli:
 
 foenixmcp.s68: $(c_obj) $(cpu) dev fatfs snd cli
 	$(CC) $(CFLAGS) $(DEFINES) -o foenixmcp.s68 $(c_obj) $(cpu_c_obj) $(dev_c_obj) $(fat_c_obj) $(snd_c_obj) $(cli_c_obj)
+
+foenixmcp.bin: $(c_obj) $(cpu) dev fatfs snd cli
+	$(CC) $(CFLAGS) $(DEFINES) -o foenixmcp.bin $(c_obj) $(cpu_c_obj) $(dev_c_obj) $(fat_c_obj) $(snd_c_obj) $(cli_c_obj)
 
 %.o: %.c $(DEPS)
 	$(CC) -S -c -o $@ $< $(CFLAGS) $(DEFINES)

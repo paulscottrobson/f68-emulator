@@ -12,13 +12,24 @@
 #include <includes.h>
 #include <buildnumber.h>
 
+int getScale(int argc, char* argv[]) {
+	for (int i = 1; i < argc; ++ i) {
+		if (strstr(argv[i], "-scale=") != 0) {
+			return std::max(atoi(&argv[i][7]), 1);
+		}
+	}
+	return 1;
+}
+
 int main(int argc,char *argv[]) {
 	char title[64];
 	sprintf(title,"%s (Build %d : %s)",WIN_TITLE,BUILD_COUNT,BUILD_TIME);
 	DEBUG_RESET();
 	int runNow = DEBUG_ARGUMENTS(argc,argv);
-	GFXOpenWindow(title,WIN_WIDTH,WIN_HEIGHT,WIN_BACKCOLOUR);
-	GFXStart(runNow);
+
+	int scale = getScale(argc, argv);
+	GFXOpenWindow(title,WIN_WIDTH * scale,WIN_HEIGHT * scale,WIN_BACKCOLOUR);
+	GFXStart(runNow,scale);
 	MEMEndRun();
 	GFXCloseWindow();
 	return(0);

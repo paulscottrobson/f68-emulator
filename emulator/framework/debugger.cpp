@@ -23,7 +23,7 @@ static Uint32 nextFrame = 0;														// Time of next frame.
 //								Handle one frame of rendering etc. for the debugger.
 // *******************************************************************************************************************************
 
-void GFXXRender(SDL_Surface *surface,int autoStart) {
+void GFXXRender(SDL_Surface *surface,int autoStart,int scale) {
 
 	if (isInitialised == 0) {														// Check if first time
 		isInitialised = 1;															// Now initialised
@@ -47,9 +47,9 @@ void GFXXRender(SDL_Surface *surface,int autoStart) {
 	}
 
 	if (inRunMode != 0 || GFXIsKeyPressed(keyMapping[DBGKEY_SHOW]))					// Display system screen if Run or Sjhow
-		DEBUG_VDURENDER(addressSettings);
+		DEBUG_VDURENDER(addressSettings,scale);
 	else 																			// Otherwise show Debugger screen
-		DEBUG_CPURENDER(addressSettings);
+		DEBUG_CPURENDER(addressSettings,scale);
 
 	currentKey = -1;																// Identify which key is pressed.
 	for (int i = 0;i < 128;i++) {
@@ -120,7 +120,13 @@ void GFXXRender(SDL_Surface *surface,int autoStart) {
 		if (frameRate == 0) {														// Run code with step breakpoint, maybe.
 			inRunMode = 0;															// Break has occurred.
 		} else {
-			while (SDL_GetTicks() < nextFrame) {};									// Wait for frame timer to elapse.
+			/*
+			int exceeded = SDL_GetTicks() - nextFrame;
+			if (exceeded > 0)
+				printf("Frame time exceeded by %d ms\n", exceeded);
+				*/
+
+			while (SDL_GetTicks() < nextFrame) { SDL_Delay(1); };									// Wait for frame timer to elapse.
 			nextFrame = SDL_GetTicks() + 1000 / frameRate;							// And calculate the next sync time.
 
 		}

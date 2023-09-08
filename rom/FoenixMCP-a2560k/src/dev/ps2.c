@@ -14,7 +14,7 @@
 #include "vicky_general.h"
 #include "dev/ps2.h"
 #include "dev/rtc.h"
-#include "dev/text_screen_iii.h"
+#include "dev/txt_screen.h"
 #include "rsrc/bitmaps/mouse_pointer.h"
 
 #define PS2_TIMEOUT_JF          10          /* Timeout in jiffies: 1/60 second units */
@@ -98,7 +98,7 @@ short g_mouse_state = 0;                /* Mouse packet state machine's state */
  * Mapping of "codepoints" 0x80 - 0x95 (function keys, etc)
  * to ANSI escape codes
  */
-const char * ansi_keys[] = {
+static const char * ansi_keys[] = {
     "1~",      /* HOME */
     "2~",      /* INS */
     "3~",      /* DELETE */
@@ -729,7 +729,7 @@ void kbd_handle_irq() {
  * modifiers = the current modifier bit flags (ALT, CTRL, META, etc)
  * c = the character found from the scan code.
  */
-char kbd_to_ansi(unsigned char modifiers, unsigned char c) {
+static char kbd_to_ansi(unsigned char modifiers, unsigned char c) {
     if ((c >= 0x80) && (c <= 0x95)) {
         /* The key is a function key or a special control key */
         const char * sequence;

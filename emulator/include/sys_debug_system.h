@@ -6,7 +6,7 @@
 //		Created:	22nd February 2022
 //		Author:		Paul Robson (paul@robsons.org.uk)
 //
-// *******************************************************************************************************************************
+// ******************************************************** ***********************************************************************
 // *******************************************************************************************************************************
 
 #ifndef _DEBUG_SYS_H
@@ -17,8 +17,8 @@
 #define DW_HEIGHT		(32)
 
 #define WIN_TITLE 		"A2560K Emulator"											// Initial Window stuff
-#define WIN_WIDTH		(DW_WIDTH*6*4+32)
-#define WIN_HEIGHT		(DW_HEIGHT*8*4+160)
+#define WIN_WIDTH		(DW_WIDTH*6*2+64)
+#define WIN_HEIGHT		(DW_HEIGHT*8*2+128)
 #define WIN_BACKCOLOUR	0x004
 
 // *******************************************************************************************************************************
@@ -27,8 +27,8 @@
 
 #define DEBUG_ARGUMENTS(ac,av) SRECHandler(ac,av)
 
-#define DEBUG_CPURENDER(x) 	DBGXRender(x,0)											// Render the debugging display
-#define DEBUG_VDURENDER(x)	DBGXRender(x,1)											// Render the game display etc.
+#define DEBUG_CPURENDER(x,scale) 	DBGXRender(x,0,scale)											// Render the debugging display
+#define DEBUG_VDURENDER(x,scale)	DBGXRender(x,1,scale)											// Render the game display etc.
 
 #define DEBUG_RESET() 		CPUReset()												// Reset the CPU / Hardware.
 #define DEBUG_HOMEPC()		(CPUGetStatus()->pc) 									// Get PC Home Address (e.g. current PCTR value)
@@ -42,7 +42,7 @@
 
 #define DEBUG_KEYMAP(k,r)	(k)
 
-void DBGXRender(int *address,int isRunMode);										// Render the debugger screen.
+void DBGXRender(int *address,int isRunMode,int scale);										// Render the debugger screen.
 BYTE8 DRVGFXHandler(BYTE8 key,BYTE8 isRunMode);
 
 #endif

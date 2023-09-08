@@ -9,7 +9,7 @@ SOURCE=FoenixMCP-a2560k$(S)src$(S)
 all:rom
 
 rom	:
-	make -C $(SOURCE) UNIT=a2560k MEMORY=flash 
+	make -C $(SOURCE) UNIT=a2560k MEMORY=flash foenixmcp.s68
 	$(CCOPY) $(SOURCE)foenixmcp.s68 ..$(S)emulator$(S)a2560k.rom
 
 clean:
@@ -17,7 +17,7 @@ clean:
 
 #
 # 		FoenixMCP-a2560k is a clone of the repository a2560 branch.
-# 		
+#
 #		The text_init() at 301 of foenixmcp.c has been uncommented so that
 # 		it switches back to text mode at the end.
 #

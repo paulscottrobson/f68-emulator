@@ -32,7 +32,7 @@ GAVIN:R:40:LONG -> READMAU 				// Reading MAU pulls data from a FIFO Queue.
 
 GAVIN:R:80-8A:BYTE -> RTC 				// Real time clock.
 
-GAVIN:B:100-106:BYTE -> INTERRUPTCTRL	// Interrupt control registers, anded on write.
+GAVIN:B:100-120:BYTE -> INTERRUPTCTRL	// ICR registers
 
 GAVIN:B:0208-0230:LONG -> TIMERS 		// R/W Gavin Timers - currently free running.
 

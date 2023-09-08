@@ -27,12 +27,24 @@ static void _FFMTError(const char *msg) {
 //
 // *******************************************************************************************************************************
 
-static int _FFMTRead(FILE *f,int size) {
+static int _FFMTReadBE(FILE *f,int size) {
 	int d = 0;
 	while (size -- > 0) {
 		int c = fgetc(f);
 		if (c < 0) return -1;
 		d = (d << 8) | (c & 0xFF);
+	}
+	return d;
+}
+
+static int _FFMTReadLE(FILE *f,int size) {
+	int d = 0;
+	int shift = 0;
+	while (size -- > 0) {
+		int c = fgetc(f);
+		if (c < 0) return -1;
+		d |= (c << shift);
+		shift += 8;
 	}
 	return d;
 }
@@ -52,7 +64,7 @@ static void _FFMTLoadPGX(char *fileName) {
 	c1 = fgetc(f);c2 = fgetc(f);c3 = fgetc(f);
 	if (c1 != 'P' || c2 != 'G' || c3 != 'X') _FFMTError("No PGX Header");
 	c1 = fgetc(f);if (c1 != 0x02) _FFMTError("Bad PGX File type");
-	address = _FFMTRead(f,4);
+	address = _FFMTReadBE(f,4);
 	CPUOverrideReset(address);
 //	printf("Load to %x\n",address);
 	while (c = fgetc(f),c >= 0) {
@@ -76,8 +88,8 @@ static void _FFMTLoadPGZ(char *fileName) {
 	c1 = fgetc(f);
 	if (c1 != 'Z' && c1 != 'z') _FFMTError("Bad PGZ initial character");
 	wSize = (c1 == 'Z') ? 3 : 4;
-	while (address = _FFMTRead(f,wSize),address >= 0) {
-		size = _FFMTRead(f,wSize);
+	while (address = _FFMTReadLE(f,wSize),address >= 0) {
+		size = _FFMTReadLE(f,wSize);
 		if (size == 0) CPUOverrideReset(address);
 //		printf("Load to %x %d\n",address,size);
 		for (int i = 0;i < size;i++) {

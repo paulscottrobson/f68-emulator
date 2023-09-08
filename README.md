@@ -24,35 +24,46 @@ Running it
 
 In the emulator directory either: 
 
+```
 ./f68 <files>					(debug)
+```
 or
+```
 ./f68 <files> go 				(run)
-
+```
 Where <files> are either Motorola SREC or Intel Hex format. See note below about -exec on vasm.
 
 When an executable SRecord is loaded it sets the run address, so the F1 key now runs that program instead of resetting the CPU. If there are
 more than one executables it's the last execute address. See testasm directory for an example file.
 
+The window may be resized by providing a scale parameter:
+
+```
+./f68 -scale=2
+```
+
+
 Debug keys
 ==========
 
-0-9A-F 			Change code position (doesn't change PC)
-With Shift 		Change data position
-Ctrl key 		Display text not hex bytes
-ESC 			Quit
-
-F1 				Reset/Run program.
-F2 				Set viewed code to PC.
-F3              Toggle output.
-F5 				Start emulation.
-F6 				Stop
-F7 				Single Step
-F8 				Step over JSR/BSR/Trap
-F9 				Set Breakpoint
+| Key | Meaning |
+|---|---|
+|0-9A-F 	|	Change code position (doesn't change PC) |
+|With Shift |	Change data position |
+|Ctrl key 	|	Display text not hex bytes |
+|ESC 		|	Quit |
+|F1 		|	Reset/Run program. |
+|F2 		|	Set viewed code to PC. |
+|F3         |    Toggle output. |
+|F5 		|	Start emulation. |
+|F6 		|		Stop |
+|F7 		|		Single Step |
+|F8 		|		Step over JSR/BSR/Trap |
+|F9 		|		Set Breakpoint |
 
 The instruction move.b d0,d0 in machine code will cause the program to break to the debugger.
 
-*** NOTE ***
+__NOTE__
 
 When building s68 or hex files using VASM, the option -exec=<start label> (or just -exec if the file runs from start) must be on the command line.
 

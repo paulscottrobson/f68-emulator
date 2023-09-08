@@ -34,13 +34,14 @@ typedef struct _DisplayInfo
 int Gavin_Read(int offset,BYTE8 *memory,int size);
 int Gavin_Write(int offset,BYTE8 *memory,int value,int size);
 
+int GAVIN_InterruptLevel(void);
 void GAVIN_FlagInterrupt(int offset,int bitMask);
 void GAVIN_InsertMauFIFO(int mau);
 void GAVIN_UpdateTimers(int cycles,int frames);
 int GAVIN_IdentifyInterrupt(int irq);
 void GAVINClearKeyboardQueue(void);
 
-void MEMRenderDisplay(void);
+void MEMRenderDisplay(int scale);
 
 void HWGetDisplayInfo(DISPLAYINFO *d,char vType,BYTE8 *vicky,SDL_Rect *rDrawArea);
 void HWRenderTextScreen(DISPLAYINFO *d,BYTE8 *vicky,BYTE8 *charMem,BYTE8 *colMem,BYTE8 *lutMem,BYTE8 *fontMem);
